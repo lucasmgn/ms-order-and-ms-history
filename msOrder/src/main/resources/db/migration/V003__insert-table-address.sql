@@ -1,0 +1,1 @@
+INSERT INTO ADDRESS(STREET, NUMBER, NEIGHBORHOOD, CITY, STATE, CEP) VALUE("Rua Sete de Abril", "9A", "Vila Ruy Barbosa", "Salvador", "BA", "40430-390");

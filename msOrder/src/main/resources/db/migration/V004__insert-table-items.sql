@@ -1,0 +1,2 @@
+INSERT INTO ITEMS(NAME, CREATION, EXPIRATION, PRICE, DESCRIPTION) VALUE ("Chocolate Cacau (2kg) - Compass.Uol", "2023-01-01", "2026-01-01", 125.00, "Chocolate meio amargo Compass.Uol");
+INSERT INTO ITEMS(NAME, CREATION, EXPIRATION, PRICE, DESCRIPTION) VALUE ("Meia Compasso Java", "2023-01-01", "2026-01-01", 45.00, "Par de meias Compass.uol");
