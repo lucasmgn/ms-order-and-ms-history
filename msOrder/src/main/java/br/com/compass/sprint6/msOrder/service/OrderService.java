@@ -1,15 +1,15 @@
 package br.com.compass.sprint6.msOrder.service;
-import br.com.compass.sprint6.msOrder.service.assembler.OrderDTOAssembler;
-import br.com.compass.sprint6.msOrder.service.assembler.OrderInputDisassembler;
-import br.com.compass.sprint6.msOrder.service.dto.request.ItemRequestDTO;
-import br.com.compass.sprint6.msOrder.service.dto.response.OrderResponseDTO;
+
 import br.com.compass.sprint6.msOrder.entities.Order;
 import br.com.compass.sprint6.msOrder.exceptions.response.OrderNotFoundException;
 import br.com.compass.sprint6.msOrder.repository.AddressRepository;
 import br.com.compass.sprint6.msOrder.repository.ItemRepository;
 import br.com.compass.sprint6.msOrder.repository.OrderRepository;
+import br.com.compass.sprint6.msOrder.service.assembler.OrderDTOAssembler;
+import br.com.compass.sprint6.msOrder.service.assembler.OrderInputDisassembler;
 import br.com.compass.sprint6.msOrder.service.dto.request.OrderRequestDTO;
 import br.com.compass.sprint6.msOrder.service.dto.response.AddressResponseViaCepDTO;
+import br.com.compass.sprint6.msOrder.service.dto.response.OrderResponseDTO;
 import br.com.compass.sprint6.msOrder.viacep.ViaCepClient;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +19,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Slf4j
@@ -114,5 +115,16 @@ public class OrderService {
         }else {
             return findAll(pageable);
         }
+    }
+
+    public boolean verifyDate(OrderRequestDTO request){
+//        request.getItems().forEach(
+//                date -> date.getCreation().getMonth() <
+//
+//        );
+//        LocalDate creation = request.getItems().get(0).getCreation();
+//        LocalDate expiration = request.getItems().get(0).getExpiration();
+
+        return true;
     }
 }
