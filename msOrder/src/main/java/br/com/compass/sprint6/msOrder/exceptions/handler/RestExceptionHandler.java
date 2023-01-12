@@ -3,6 +3,7 @@ package br.com.compass.sprint6.msOrder.exceptions.handler;
 
 import br.com.compass.sprint6.msOrder.enums.ErrorCode;
 import br.com.compass.sprint6.msOrder.exceptions.response.ExceptionResponse;
+import br.com.compass.sprint6.msOrder.exceptions.response.ItemNotFoundException;
 import br.com.compass.sprint6.msOrder.exceptions.response.OrderNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
@@ -68,6 +69,12 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler{
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exceptionResponse);
     }
 
+    @ExceptionHandler(ItemNotFoundException.class)
+    public final ResponseEntity<Object> handleItemNotFoundException(ItemNotFoundException ex) {
+        log.error(ex.getMessage(), ex);
+        ExceptionResponse exceptionResponse = new ExceptionResponse(ErrorCode.ITEM_NOT_FOUND, ex);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exceptionResponse);
+    }
 
     @ExceptionHandler(Exception.class)
     public final ResponseEntity<Object> handleAllExceptions(Exception ex) {

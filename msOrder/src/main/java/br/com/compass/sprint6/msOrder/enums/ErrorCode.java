@@ -8,12 +8,10 @@ import lombok.Getter;
 public enum ErrorCode {
 
     BAD_REQUEST("Requisição inválida"),
-
     INVALID_PARAMETER("Parâmetro Inválido!"),
-
     INTERNAL_SERVER_ERROR("Ocorreu um erro interno."),
-
-    ORDER_NOT_FOUND("Pedido não encontrado!");
+    ORDER_NOT_FOUND("Pedido não encontrado!"),
+    ITEM_NOT_FOUND("Item não encontrado!");
 
     private final String message;
 }

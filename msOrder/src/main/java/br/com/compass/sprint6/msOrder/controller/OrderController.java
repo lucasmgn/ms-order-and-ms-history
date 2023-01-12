@@ -1,7 +1,12 @@
 package br.com.compass.sprint6.msOrder.controller;
 
+import br.com.compass.sprint6.msOrder.entities.Item;
+import br.com.compass.sprint6.msOrder.service.ItemService;
 import br.com.compass.sprint6.msOrder.service.OrderService;
+import br.com.compass.sprint6.msOrder.service.dto.request.ItemRequestDTO;
 import br.com.compass.sprint6.msOrder.service.dto.request.OrderRequestDTO;
+import br.com.compass.sprint6.msOrder.service.dto.response.ItemResponseDTO;
+import br.com.compass.sprint6.msOrder.service.dto.response.ItemResumeResponseDTO;
 import br.com.compass.sprint6.msOrder.service.dto.response.OrderResponseDTO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -13,30 +18,32 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/pedidos/")
 public class OrderController {
 
     private final OrderService service;
 
-    @PostMapping
+    private final ItemService itemService;
+
+    @PostMapping("/api/pedidos/")
     public ResponseEntity<OrderResponseDTO> create(@RequestBody @Valid OrderRequestDTO request) {
         log.info("Criando uma nova Order...");
         OrderResponseDTO response = service.create(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    @GetMapping
+    @GetMapping("/api/pedidos/")
     public ResponseEntity<List<OrderResponseDTO>> findAll(@RequestParam(required = false, name = "cpf") String cpf, @PageableDefault(size = 10) Pageable pagination) {
         log.info("Listando Order com página de {} registros...", pagination.getPageSize());
         List<OrderResponseDTO> responsePage = service.verify(pagination, cpf);
         return ResponseEntity.status(HttpStatus.OK).body(responsePage);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/api/pedidos/{id}")
     public ResponseEntity<OrderResponseDTO> findBy(@PathVariable("id") Long id){
         log.info("Buscando Order...");
         OrderResponseDTO pierResponseDTO = service.findBy(id);
@@ -44,20 +51,22 @@ public class OrderController {
     }
 
     @PatchMapping("api/itens/{id}")
-    public ResponseEntity<OrderResponseDTO> updateItens(@PathVariable("id") Long id, @RequestBody @Valid OrderRequestDTO request){
-        log.info("Atualizando Pier por id...");
-        OrderResponseDTO pierResponseDTO = service.update(id, request);
-        return ResponseEntity.status(HttpStatus.OK).body(pierResponseDTO);
+    public ResponseEntity<ItemResumeResponseDTO> updateItens(@PathVariable("id") Long id, @RequestBody Map<String, Object> fields){
+        log.info("Atualizando Itens...");
+        Item item = itemService.fetchOrFail(id);
+        itemService.merge(fields,item);
+        ItemResumeResponseDTO itemResponseDTO = itemService.updateItem(id);
+        return ResponseEntity.status(HttpStatus.OK).body(itemResponseDTO);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/api/pedidos/{id}")
     public ResponseEntity<OrderResponseDTO> update(@PathVariable("id") Long id, @RequestBody @Valid OrderRequestDTO request){
         log.info("Atualizando Order...");
         OrderResponseDTO pierResponseDTO = service.update(id, request);
         return ResponseEntity.status(HttpStatus.OK).body(pierResponseDTO);
     }
 
-    @DeleteMapping ("/{id}")
+    @DeleteMapping("/api/pedidos/{id}")
     public ResponseEntity<Void> delete (@PathVariable("id") Long id){
         log.info("Excluindo uma Order...");
         service.delete(id);

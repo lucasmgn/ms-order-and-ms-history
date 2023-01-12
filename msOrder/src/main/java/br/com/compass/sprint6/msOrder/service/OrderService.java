@@ -1,6 +1,7 @@
 package br.com.compass.sprint6.msOrder.service;
 import br.com.compass.sprint6.msOrder.service.assembler.OrderDTOAssembler;
 import br.com.compass.sprint6.msOrder.service.assembler.OrderInputDisassembler;
+import br.com.compass.sprint6.msOrder.service.dto.request.ItemRequestDTO;
 import br.com.compass.sprint6.msOrder.service.dto.response.OrderResponseDTO;
 import br.com.compass.sprint6.msOrder.entities.Order;
 import br.com.compass.sprint6.msOrder.exceptions.response.OrderNotFoundException;
