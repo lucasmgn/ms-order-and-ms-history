@@ -1,6 +1,7 @@
 package br.com.compass.sprint6.msOrder.service;
 
 import br.com.compass.sprint6.msOrder.entities.Order;
+import br.com.compass.sprint6.msOrder.exceptions.response.InvalidDateException;
 import br.com.compass.sprint6.msOrder.exceptions.response.OrderNotFoundException;
 import br.com.compass.sprint6.msOrder.repository.AddressRepository;
 import br.com.compass.sprint6.msOrder.repository.ItemRepository;
@@ -32,6 +33,7 @@ public class OrderService {
     private final OrderInputDisassembler disassembler;
     private final AddressRepository addressRepository;
     private final ItemRepository itemRepository;
+    private final ItemService itemService;
     private final ViaCepClient client;
 
     public List<OrderResponseDTO> findAll(Pageable pageable) {
@@ -68,6 +70,7 @@ public class OrderService {
     @Transactional
     public OrderResponseDTO create(OrderRequestDTO request) {
         log.info("Chamando método create - Service Order");
+        itemService.verifyDate(request);
         String cep = request.getAddress().getCep().replaceAll("[^0-9]", "");
         request.getAddress().setCep(cep);
         AddressResponseViaCepDTO responseDTO = client.find((cep));
@@ -115,16 +118,5 @@ public class OrderService {
         }else {
             return findAll(pageable);
         }
-    }
-
-    public boolean verifyDate(OrderRequestDTO request){
-//        request.getItems().forEach(
-//                date -> date.getCreation().getMonth() <
-//
-//        );
-//        LocalDate creation = request.getItems().get(0).getCreation();
-//        LocalDate expiration = request.getItems().get(0).getExpiration();
-
-        return true;
     }
 }

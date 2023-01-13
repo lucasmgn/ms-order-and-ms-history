@@ -3,6 +3,7 @@ package br.com.compass.sprint6.msOrder.exceptions.handler;
 
 import br.com.compass.sprint6.msOrder.enums.ErrorCode;
 import br.com.compass.sprint6.msOrder.exceptions.response.ExceptionResponse;
+import br.com.compass.sprint6.msOrder.exceptions.response.InvalidDateException;
 import br.com.compass.sprint6.msOrder.exceptions.response.ItemNotFoundException;
 import br.com.compass.sprint6.msOrder.exceptions.response.OrderNotFoundException;
 import lombok.extern.slf4j.Slf4j;
@@ -74,6 +75,13 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler{
         log.error(ex.getMessage(), ex);
         ExceptionResponse exceptionResponse = new ExceptionResponse(ErrorCode.ITEM_NOT_FOUND, ex);
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exceptionResponse);
+    }
+
+    @ExceptionHandler(InvalidDateException.class)
+    public final ResponseEntity<Object> handleInvalidDateException(InvalidDateException ex) {
+        log.error(ex.getMessage(), ex);
+        ExceptionResponse exceptionResponse = new ExceptionResponse(ErrorCode.INVALID_DATE_EXCEPTION, ex);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exceptionResponse);
     }
 
     @ExceptionHandler(Exception.class)

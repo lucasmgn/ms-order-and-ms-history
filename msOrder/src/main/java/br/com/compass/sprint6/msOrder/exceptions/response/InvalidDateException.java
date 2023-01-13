@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 import java.io.Serial;
 
 @Getter
-public class ItemNotFoundException extends RuntimeException{
+public class InvalidDateException extends RuntimeException{
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -15,10 +15,10 @@ public class ItemNotFoundException extends RuntimeException{
     private final ErrorCode errorCode;
     private final HttpStatus httpStatus;
 
-    public ItemNotFoundException() {
-        super(ErrorCode.ITEM_NOT_FOUND.name());
-        this.httpStatus = HttpStatus.NOT_FOUND;
-        this.errorCode = ErrorCode.ITEM_NOT_FOUND;
-        this.details = ErrorCode.ITEM_NOT_FOUND.getMessage();
+    public InvalidDateException() {
+        super(ErrorCode.INVALID_DATE_EXCEPTION.name());
+        this.httpStatus = HttpStatus.BAD_REQUEST;
+        this.errorCode = ErrorCode.INVALID_DATE_EXCEPTION;
+        this.details = ErrorCode.INVALID_DATE_EXCEPTION.getMessage();
     }
 }
