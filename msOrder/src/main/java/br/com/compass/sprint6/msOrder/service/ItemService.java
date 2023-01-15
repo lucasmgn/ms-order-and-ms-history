@@ -5,10 +5,7 @@ import br.com.compass.sprint6.msOrder.exceptions.response.InvalidDateException;
 import br.com.compass.sprint6.msOrder.exceptions.response.ItemNotFoundException;
 import br.com.compass.sprint6.msOrder.repository.ItemRepository;
 import br.com.compass.sprint6.msOrder.service.assembler.ItemDTOAssembler;
-import br.com.compass.sprint6.msOrder.service.assembler.ItemInputDisassembler;
-import br.com.compass.sprint6.msOrder.service.dto.request.ItemRequestDTO;
 import br.com.compass.sprint6.msOrder.service.dto.request.OrderRequestDTO;
-import br.com.compass.sprint6.msOrder.service.dto.response.ItemResponseDTO;
 import br.com.compass.sprint6.msOrder.service.dto.response.ItemResumeResponseDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.transaction.Transactional;
@@ -29,12 +26,12 @@ public class ItemService {
     private final ItemRepository repository;
 
     public Item fetchOrFail(Long id) {
-        log.info("Chamando método fetchOrFail (ID) - Service Order");
+        log.info("Chamando método fetchOrFail (ID) - Service Item");
         return repository.findById(id).orElseThrow(ItemNotFoundException::new);
     }
 
     public ItemResumeResponseDTO updateItem(Long id) {
-        log.info("Chamando método updateItem - Service Order");
+        log.info("Chamando método updateItem - Service Item");
         Item item = fetchOrFail(id);
         item = create(item);
         return assembler.toResumeModel(item);
@@ -48,14 +45,8 @@ public class ItemService {
 
     public void verifyDate(OrderRequestDTO request) {
         log.info("Chamando método verifyDate - Service Item");
-        request.getItems()
-                .forEach(
-                        data -> {
-                            if (data.getCreation().isAfter(data.getExpiration())) {
-                                throw new InvalidDateException();
-                            }
-                        }
-                );
+        request.getItems().forEach(data -> {if (data.getCreation().isAfter(data.getExpiration())) {
+            throw new InvalidDateException();}});
     }
 
     public void merge(Map<String, Object> sourceData, Item itemDestiny) {

@@ -1,7 +1,6 @@
 package br.com.compass.sprint6.msOrder.service;
 
 import br.com.compass.sprint6.msOrder.entities.Order;
-import br.com.compass.sprint6.msOrder.exceptions.response.InvalidDateException;
 import br.com.compass.sprint6.msOrder.exceptions.response.OrderNotFoundException;
 import br.com.compass.sprint6.msOrder.repository.AddressRepository;
 import br.com.compass.sprint6.msOrder.repository.ItemRepository;
@@ -20,7 +19,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Slf4j

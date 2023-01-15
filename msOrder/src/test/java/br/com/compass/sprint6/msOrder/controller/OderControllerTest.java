@@ -9,8 +9,10 @@ import br.com.compass.sprint6.msOrder.service.dto.request.OrderRequestDTO;
 import br.com.compass.sprint6.msOrder.service.dto.response.AddressResponseDTO;
 import br.com.compass.sprint6.msOrder.service.dto.response.ItemResumeResponseDTO;
 import br.com.compass.sprint6.msOrder.service.dto.response.OrderResponseDTO;
+import br.com.compass.sprint6.msOrder.utils.CreateObject;
 import br.com.compass.sprint6.msOrder.utils.TestUtils;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -43,6 +45,8 @@ class OderControllerTest {
     @MockBean
     private ItemService itemService;
 
+    @InjectMocks
+    private CreateObject createObject;
     @Autowired
     private MockMvc mvc;
 
@@ -92,7 +96,7 @@ class OderControllerTest {
 
     @Test
     void create() throws Exception {
-        OrderRequestDTO request = getOderRequestDTO();
+        OrderRequestDTO request = createObject.getOderRequestDTO();
         String input = TestUtils.mapToJson(request);
 
         MvcResult result = mvc
@@ -109,7 +113,7 @@ class OderControllerTest {
 
     @Test
     void update() throws Exception {
-        OrderRequestDTO request = getOderRequestDTO();
+        OrderRequestDTO request = createObject.getOderRequestDTO();
         String input = TestUtils.mapToJson(request);
 
         MvcResult result = mvc
@@ -136,24 +140,5 @@ class OderControllerTest {
 
         assertEquals(HttpStatus.NO_CONTENT.value(), response.getStatus());
     }
-
-    private OrderRequestDTO getOderRequestDTO() {
-        return OrderRequestDTO.builder()
-                .cpf("095.917.815-55")
-                .address(new AddressResumeRequestDTO())
-                .items(List.of(new ItemRequestDTO()))
-                .total(new BigDecimal("5000"))
-                .build();
-    }
-
-//    private AddressResumeRequestDTO getAddressResponseDTO() {
-//        return AddressResumeRequestDTO.builder()
-//                .cep("40430390")
-//                .city("SA")
-//                .neighborhood("Vila Rui Barbosa")
-//                .street("Rua sete de abril")
-//                .number("9A")
-//                .build();
-//    }
 
 }

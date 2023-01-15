@@ -7,9 +7,13 @@ import br.com.compass.sprint6.msOrder.repository.ItemRepository;
 import br.com.compass.sprint6.msOrder.repository.OrderRepository;
 import br.com.compass.sprint6.msOrder.service.assembler.OrderDTOAssembler;
 import br.com.compass.sprint6.msOrder.service.assembler.OrderInputDisassembler;
+import br.com.compass.sprint6.msOrder.service.dto.request.AddressResumeRequestDTO;
 import br.com.compass.sprint6.msOrder.service.dto.request.OrderRequestDTO;
+import br.com.compass.sprint6.msOrder.service.dto.response.AddressResponseDTO;
 import br.com.compass.sprint6.msOrder.service.dto.response.AddressResponseViaCepDTO;
+import br.com.compass.sprint6.msOrder.service.dto.response.ItemResponseDTO;
 import br.com.compass.sprint6.msOrder.service.dto.response.OrderResponseDTO;
+import br.com.compass.sprint6.msOrder.utils.CreateObject;
 import br.com.compass.sprint6.msOrder.viacep.ViaCepClient;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -23,11 +27,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
-import java.util.Arrays;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
@@ -56,10 +62,16 @@ class OrderServiceTest {
     private ItemRepository itemRepository;
 
     @Mock
+    private ItemService itemService;
+
+    @Mock
     private Pageable pageable;
 
     @Mock
     private ViaCepClient client;
+
+    @InjectMocks
+    private CreateObject createObject;
 
     @Test
     void shouldDeleteOrder_success() {
@@ -76,28 +88,34 @@ class OrderServiceTest {
         Assertions.assertThrows(OrderNotFoundException.class, () -> service.delete(ID));
     }
 
-//    @Test
-//    void shouldCreateOrder_success() {
-//        OrderRequestDTO request = new OrderRequestDTO();
-//        OrderResponseDTO response = new OrderResponseDTO();
-//        AddressResponseViaCepDTO addressResponseViaCepDTO = new AddressResponseViaCepDTO();
-//
-//        Order order = new Order();
-//
-//        Mockito.when(client.find(any())).thenReturn(addressResponseViaCepDTO);
-//        Mockito.when(disassembler.toDomainObject(any())).thenReturn(order);
-//        Mockito.when(repository.save(any())).thenReturn(order);
-//        Mockito.when(assembler.toModel(any())).thenReturn(response);
-//
-//        OrderResponseDTO orderResponseDTO = service.create(request);
-//        assertEquals(response, orderResponseDTO);
-//        verify(repository).save(any());
-//    }
+    @Test
+    void shouldFindOrderById_NotFound() {
+        Mockito.when(repository.findById(any())).thenReturn(Optional.empty());
+
+        assertThrows(OrderNotFoundException.class, () -> service.findBy(ID));
+    }
+
+    @Test
+    void shouldCreateOrder_success() {
+        OrderRequestDTO request = createObject.getOderRequestDTO();
+        OrderResponseDTO response = createObject.getOderResponseDTO();
+        AddressResponseViaCepDTO addressResponseViaCepDTO = new AddressResponseViaCepDTO();
+        Order order = new Order();
+
+        Mockito.when(client.find(request.getAddress().getCep())).thenReturn(addressResponseViaCepDTO);
+        Mockito.when(disassembler.toDomainObject(any())).thenReturn(order);
+        Mockito.when(repository.save(any())).thenReturn(order);
+        Mockito.when(assembler.toModel(any())).thenReturn(response);
+
+        OrderResponseDTO orderResponseDTO = service.create(request);
+        assertEquals(response, orderResponseDTO);
+        verify(repository).save(any());
+    }
 
     @Test
     void shouldFindAllOrder_success(){
         Page<Order> shipsPage = new PageImpl<>(List.of(new Order()));
-        List<OrderResponseDTO> orderResponseDTOs = List.of(new OrderResponseDTO());
+        List<OrderResponseDTO> orderResponseDTOs = List.of(createObject.getOderResponseDTO());
 
         Mockito.when(repository.findAll(any(Pageable.class))).thenReturn(shipsPage);
         Mockito.when(assembler.toCollectionModel(shipsPage.getContent())).thenReturn(orderResponseDTOs);
@@ -110,11 +128,22 @@ class OrderServiceTest {
     @Test
     void findBy_sucess(){
         Order order = new Order();
-        OrderResponseDTO response = new OrderResponseDTO();
+        OrderResponseDTO response = createObject.getOderResponseDTO();
         Mockito.when(repository.findById(any())).thenReturn(Optional.of(order));
         Mockito.when(assembler.toModel(any())).thenReturn(response);
 
         OrderResponseDTO orderResponseDTO = service.findBy(ID);
         assertEquals(response, orderResponseDTO);
     }
+
+//    private AddressResumeRequestDTO getAddressResumeResponseDTO() {
+//        return AddressResumeRequestDTO.builder()
+//                .cep("40430390")
+//                .city("SA")
+//                .neighborhood("Vila Rui Barbosa")
+//                .street("Rua sete de abril")
+//                .number("9A")
+//                .build();
+//    }
+
 }
