@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AddressRepository extends JpaRepository<Address, Long> {
-//    Address findByCepAndNumber(String cep, String number);
+    Address findByCepAndNumber(String cep, String number);
 }

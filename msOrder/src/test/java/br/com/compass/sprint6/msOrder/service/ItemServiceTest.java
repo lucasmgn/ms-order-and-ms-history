@@ -5,6 +5,7 @@ import br.com.compass.sprint6.msOrder.exceptions.response.InvalidDateException;
 import br.com.compass.sprint6.msOrder.exceptions.response.ItemNotFoundException;
 import br.com.compass.sprint6.msOrder.repository.ItemRepository;
 import br.com.compass.sprint6.msOrder.service.assembler.ItemDTOAssembler;
+import br.com.compass.sprint6.msOrder.service.dto.request.ItemRequestDTO;
 import br.com.compass.sprint6.msOrder.service.dto.request.OrderRequestDTO;
 import br.com.compass.sprint6.msOrder.service.dto.response.ItemResponseDTO;
 import br.com.compass.sprint6.msOrder.service.dto.response.ItemResumeResponseDTO;
@@ -20,8 +21,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -84,4 +87,12 @@ class ItemServiceTest {
         assertNotEquals(sourceData.get("creation"), item.getCreation());
     }
 
+    @Test
+    void shouldGetTotal() {
+        OrderRequestDTO oderRequestDTO = createObject.getOderRequestDTO();
+
+        service.getTotal(oderRequestDTO);
+
+        assertEquals(new BigDecimal("15"), oderRequestDTO.getTotal());
+    }
 }

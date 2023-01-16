@@ -1,17 +1,15 @@
 package br.com.compass.sprint6.msOrder.service;
 
+import br.com.compass.sprint6.msOrder.entities.Address;
 import br.com.compass.sprint6.msOrder.entities.Order;
 import br.com.compass.sprint6.msOrder.exceptions.response.OrderNotFoundException;
-import br.com.compass.sprint6.msOrder.repository.AddressRepository;
 import br.com.compass.sprint6.msOrder.repository.ItemRepository;
 import br.com.compass.sprint6.msOrder.repository.OrderRepository;
 import br.com.compass.sprint6.msOrder.service.assembler.OrderDTOAssembler;
 import br.com.compass.sprint6.msOrder.service.assembler.OrderInputDisassembler;
 import br.com.compass.sprint6.msOrder.service.dto.request.OrderRequestDTO;
 import br.com.compass.sprint6.msOrder.service.dto.request.OrderResumeRequestDTO;
-import br.com.compass.sprint6.msOrder.service.dto.response.AddressResponseViaCepDTO;
 import br.com.compass.sprint6.msOrder.service.dto.response.OrderResponseDTO;
-import br.com.compass.sprint6.msOrder.viacep.ViaCepClient;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +18,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @Slf4j
@@ -31,10 +28,9 @@ public class OrderService {
     private final OrderRepository repository;
     private final OrderDTOAssembler assembler;
     private final OrderInputDisassembler disassembler;
-    private final AddressRepository addressRepository;
+    private final AddressService addressService;
     private final ItemRepository itemRepository;
     private final ItemService itemService;
-    private final ViaCepClient client;
 
     public List<OrderResponseDTO> findAll(Pageable pageable) {
         log.info("Chamando método findAll - Service Order");
@@ -72,12 +68,9 @@ public class OrderService {
         log.info("Chamando método create - Service Order");
         itemService.verifyDate(request);
         itemService.getTotal(request);
-        String cep = request.getAddress().getCep().replaceAll("[^0-9]", "");
-        request.getAddress().setCep(cep);
-        AddressResponseViaCepDTO responseDTO = client.find((cep));
-        toAdress(request, responseDTO);
+        Address address = addressService.verifyAddress(request);
         Order order = disassembler.toDomainObject(request);
-        addressRepository.save(order.getAddress());
+        order.setAddress(address);
         itemRepository.saveAll(order.getItems());
         order = create(order);
         return assembler.toModel(order);
@@ -101,14 +94,6 @@ public class OrderService {
             throw new OrderNotFoundException();
         }
         return byCpf;
-    }
-
-    private static void toAdress(OrderRequestDTO request, AddressResponseViaCepDTO responseDTO) {
-        request.getAddress().setState(responseDTO.getUf());
-        request.getAddress().setNumber(request.getAddress().getNumber());
-        request.getAddress().setCity(responseDTO.getLocalidade());
-        request.getAddress().setNeighborhood(responseDTO.getBairro());
-        request.getAddress().setStreet(responseDTO.getLogradouro());
     }
 
     public List<OrderResponseDTO> verify(Pageable pageable, String cpf) {
