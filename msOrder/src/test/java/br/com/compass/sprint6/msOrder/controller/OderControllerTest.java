@@ -36,7 +36,7 @@ import static org.mockito.Mockito.when;
 @WebMvcTest(controllers = OrderController.class)
 class OderControllerTest {
     public static final String BASE_URL = "/api/pedidos/";
-    public static final String BASE_URL_ITEMS = "/api/item/1";
+    public static final String BASE_URL_ITEMS = "/api/itens/1";
     public static final String ID_URL = BASE_URL + "1";
 
     @MockBean
@@ -76,23 +76,23 @@ class OderControllerTest {
         assertEquals(HttpStatus.OK.value(), response.getStatus());
     }
 
-//    @Test
-//    void updateItens() throws Exception {
-//        Map<String, Object> fields;
-//        ItemResumeResponseDTO request = new ItemResumeResponseDTO();
-//        String input = TestUtils.mapToJson(request);
-//
-//        MvcResult result = mvc
-//                .perform(MockMvcRequestBuilders.patch(BASE_URL_ITEMS)
-//                        .accept(MediaType.APPLICATION_JSON)
-//                        .content(input)
-//                        .contentType(MediaType.APPLICATION_JSON))
-//                .andReturn();
-//
-//        MockHttpServletResponse response = result.getResponse();
-//
-//        assertEquals(HttpStatus.OK.value(), response.getStatus());
-//    }
+    @Test
+    void updateItens() throws Exception {
+//        Map<String, Object> fields = Map<>;
+        ItemResumeResponseDTO request = createObject.getItemResumeResponseDTO();
+        String input = TestUtils.mapToJson(request);
+
+        MvcResult result = mvc
+                .perform(MockMvcRequestBuilders.patch(BASE_URL_ITEMS)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .content(input)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andReturn();
+
+        MockHttpServletResponse response = result.getResponse();
+
+        assertEquals(HttpStatus.OK.value(), response.getStatus());
+    }
 
     @Test
     void create() throws Exception {

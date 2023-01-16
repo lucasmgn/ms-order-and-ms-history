@@ -1,13 +1,16 @@
 package br.com.compass.sprint6.msOrder.utils;
 
 import br.com.compass.sprint6.msOrder.entities.Item;
+import br.com.compass.sprint6.msOrder.entities.Order;
 import br.com.compass.sprint6.msOrder.service.assembler.ItemDTOAssembler;
 import br.com.compass.sprint6.msOrder.service.assembler.ItemInputDisassembler;
+import br.com.compass.sprint6.msOrder.service.assembler.OrderInputDisassembler;
 import br.com.compass.sprint6.msOrder.service.dto.request.AddressResumeRequestDTO;
 import br.com.compass.sprint6.msOrder.service.dto.request.ItemRequestDTO;
 import br.com.compass.sprint6.msOrder.service.dto.request.OrderRequestDTO;
 import br.com.compass.sprint6.msOrder.service.dto.response.AddressResponseDTO;
 import br.com.compass.sprint6.msOrder.service.dto.response.ItemResponseDTO;
+import br.com.compass.sprint6.msOrder.service.dto.response.ItemResumeResponseDTO;
 import br.com.compass.sprint6.msOrder.service.dto.response.OrderResponseDTO;
 
 import java.math.BigDecimal;
@@ -18,6 +21,8 @@ public class CreateObject {
 
     private ItemDTOAssembler assembler;
 
+    private OrderInputDisassembler disassembler;
+
     public Item item() {
         Item i = new Item();
         i.setName("Test");
@@ -26,6 +31,16 @@ public class CreateObject {
         i.setPrice(new BigDecimal("12"));
         i.setDescription("test");
         return i;
+    }
+
+    public ItemResumeResponseDTO getItemResumeResponseDTO() {
+        ItemResumeResponseDTO responseDTO = new ItemResumeResponseDTO();
+        responseDTO.setName("test");
+        responseDTO.setPrice(new BigDecimal("15"));
+        responseDTO.setCreation(LocalDate.of(2002, 12, 01));
+        responseDTO.setExpiration(LocalDate.of(2003, 02, 12));
+        responseDTO.setDescription("Test");
+        return responseDTO;
     }
 
     public ItemResponseDTO itemResponseDTO() {
@@ -50,6 +65,10 @@ public class CreateObject {
         return requestDTO;
     }
 
+    public Order getOrder(){
+        return disassembler.toDomainObject(getOderRequestDTO());
+    }
+
     public AddressResumeRequestDTO getAddressResumeResponseDTO() {
         return AddressResumeRequestDTO.builder()
                 .cep("40430390")
@@ -60,7 +79,7 @@ public class CreateObject {
                 .build();
     }
 
-    private AddressResponseDTO getAddressResponseDTO() {
+    public AddressResponseDTO getAddressResponseDTO() {
         return AddressResponseDTO.builder()
                 .cep("40430390")
                 .city("SA")
@@ -70,14 +89,14 @@ public class CreateObject {
                 .build();
     }
 
-    private ItemResponseDTO getItemsResponseDTO() {
-        return ItemResponseDTO.builder()
-                .name("test")
-                .price(new BigDecimal("15"))
-                .creation(LocalDate.of(2002, 12, 01))
-                .expiration(LocalDate.of(2003, 02, 12))
-                .description("Test")
-                .build();
+    public ItemResponseDTO getItemsResponseDTO() {
+        ItemResponseDTO responseDTO = new ItemResponseDTO();
+        responseDTO.setName("test");
+        responseDTO.setPrice(new BigDecimal("15"));
+        responseDTO.setCreation(LocalDate.of(2002, 12, 01));
+        responseDTO.setExpiration(LocalDate.of(2003, 02, 12));
+        responseDTO.setDescription("Test");
+        return responseDTO;
     }
 
     private ItemRequestDTO getItemsRequestDTO() {
@@ -89,6 +108,4 @@ public class CreateObject {
                 .description("Test")
                 .build();
     }
-
-
 }

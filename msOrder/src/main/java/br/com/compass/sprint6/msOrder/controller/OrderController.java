@@ -48,7 +48,7 @@ public class OrderController {
         return ResponseEntity.status(HttpStatus.OK).body(pierResponseDTO);
     }
 
-    @PatchMapping("api/itens/{id}")
+    @PatchMapping("/api/itens/{id}")
     public ResponseEntity<ItemResumeResponseDTO> updateItens(@PathVariable("id") Long id, @RequestBody Map<String, Object> fields){
         log.info("Atualizando Itens...");
         Item item = itemService.fetchOrFail(id);

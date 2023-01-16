@@ -7,11 +7,8 @@ import br.com.compass.sprint6.msOrder.repository.ItemRepository;
 import br.com.compass.sprint6.msOrder.repository.OrderRepository;
 import br.com.compass.sprint6.msOrder.service.assembler.OrderDTOAssembler;
 import br.com.compass.sprint6.msOrder.service.assembler.OrderInputDisassembler;
-import br.com.compass.sprint6.msOrder.service.dto.request.AddressResumeRequestDTO;
 import br.com.compass.sprint6.msOrder.service.dto.request.OrderRequestDTO;
-import br.com.compass.sprint6.msOrder.service.dto.response.AddressResponseDTO;
 import br.com.compass.sprint6.msOrder.service.dto.response.AddressResponseViaCepDTO;
-import br.com.compass.sprint6.msOrder.service.dto.response.ItemResponseDTO;
 import br.com.compass.sprint6.msOrder.service.dto.response.OrderResponseDTO;
 import br.com.compass.sprint6.msOrder.utils.CreateObject;
 import br.com.compass.sprint6.msOrder.viacep.ViaCepClient;
@@ -28,7 +25,6 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,34 +38,24 @@ import static org.mockito.Mockito.verify;
 class OrderServiceTest {
 
     public static final Long ID = 1L;
-
     @InjectMocks
     private OrderService service;
-
     @Mock
     private OrderRepository repository;
-
     @Mock
     private OrderDTOAssembler assembler;
-
     @Mock
     private OrderInputDisassembler disassembler;
-
     @Mock
     private AddressRepository addressRepository;
-
     @Mock
     private ItemRepository itemRepository;
-
     @Mock
     private ItemService itemService;
-
     @Mock
     private Pageable pageable;
-
     @Mock
     private ViaCepClient client;
-
     @InjectMocks
     private CreateObject createObject;
 
@@ -136,14 +122,38 @@ class OrderServiceTest {
         assertEquals(response, orderResponseDTO);
     }
 
-//    private AddressResumeRequestDTO getAddressResumeResponseDTO() {
-//        return AddressResumeRequestDTO.builder()
-//                .cep("40430390")
-//                .city("SA")
-//                .neighborhood("Vila Rui Barbosa")
-//                .street("Rua sete de abril")
-//                .number("9A")
-//                .build();
-//    }
+    @Test
+    void shouldUpdateOrder_success() {
+        OrderRequestDTO orderRequestDTO = new OrderRequestDTO();
+        orderRequestDTO.setTotal(new BigDecimal("10"));
+        OrderResponseDTO response = new OrderResponseDTO();
+        Order order = new Order();
 
+        Mockito.when(repository.findById(any())).thenReturn(Optional.of(order));
+        Mockito.when(repository.save(any())).thenReturn(order);
+        Mockito.when(assembler.toModel(any())).thenReturn(response);
+
+        OrderResponseDTO update = service.update(ID, orderRequestDTO);
+        assertEquals(response, update);
+        verify(repository).save(any());
+    }
+
+    @Test
+    void shouldFetchOrFail_Error() {
+        assertThrows(OrderNotFoundException.class, () -> service.fetchOrFail("09591781555"));
+    }
+
+    @Test
+    void shouldVerify_FindAll() {
+        List<Order> order = List.of(new Order());
+        List<OrderResponseDTO> response = List.of(new OrderResponseDTO());
+        Page<Order> a = new PageImpl<>(order);
+
+        Mockito.when(repository.findAll(any(Pageable.class))).thenReturn(a);
+        Mockito.when(assembler.toCollectionModel(a.getContent())).thenReturn(response);
+
+        List<OrderResponseDTO> verify = service.verify(pageable, null);
+
+        assertEquals(verify, response);
+    }
 }
