@@ -8,6 +8,7 @@ import br.com.compass.sprint6.msOrder.repository.OrderRepository;
 import br.com.compass.sprint6.msOrder.service.assembler.OrderDTOAssembler;
 import br.com.compass.sprint6.msOrder.service.assembler.OrderInputDisassembler;
 import br.com.compass.sprint6.msOrder.service.dto.request.OrderRequestDTO;
+import br.com.compass.sprint6.msOrder.service.dto.request.OrderResumeRequestDTO;
 import br.com.compass.sprint6.msOrder.service.dto.response.AddressResponseViaCepDTO;
 import br.com.compass.sprint6.msOrder.service.dto.response.OrderResponseDTO;
 import br.com.compass.sprint6.msOrder.viacep.ViaCepClient;
@@ -19,6 +20,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Slf4j
@@ -46,7 +48,7 @@ public class OrderService {
         return assembler.toModel(order);
     }
 
-    public OrderResponseDTO update(Long id, OrderRequestDTO request) {
+    public OrderResponseDTO update(Long id, OrderResumeRequestDTO request) {
         log.info("Chamando método update - Service Order");
         Order order = fetchOrFail(id);
         disassembler.copyToDomainObject(request, order);
@@ -69,6 +71,7 @@ public class OrderService {
     public OrderResponseDTO create(OrderRequestDTO request) {
         log.info("Chamando método create - Service Order");
         itemService.verifyDate(request);
+        itemService.getTotal(request);
         String cep = request.getAddress().getCep().replaceAll("[^0-9]", "");
         request.getAddress().setCep(cep);
         AddressResponseViaCepDTO responseDTO = client.find((cep));

@@ -42,12 +42,8 @@ class ItemServiceTest {
     private ItemService service;
     @InjectMocks
     private CreateObject createObject;
-
-    @Mock
+    @Spy
     private ObjectMapper objectMapper;
-
-//    @Mock
-    private Field field;
 
     @Test
     void shouldFindItemById_NotFound() {
@@ -59,13 +55,16 @@ class ItemServiceTest {
     @Test
     void shouldUpdateItem_success() {
         Item item = createObject.item();
-        ItemResponseDTO response = createObject.itemResponseDTO();
+        item.setId(ID);
+        ItemResumeResponseDTO itemResumeResponseDTO = createObject.getItemResumeResponseDTO();
 
         Mockito.when(repository.findById(any())).thenReturn(Optional.of(item));
         Mockito.when(repository.save(any())).thenReturn(item);
+        Mockito.when(assembler.toResumeModel(any())).thenReturn(itemResumeResponseDTO);
 
-        ItemResumeResponseDTO itemResponseDTO = service.updateItem(ID);
-        assertEquals(response, itemResponseDTO);
+        ItemResumeResponseDTO responseDTO = service.updateItem(ID);
+
+        assertEquals(itemResumeResponseDTO.getPrice(), responseDTO.getPrice());
         verify(repository).save(any());
     }
 
@@ -76,21 +75,13 @@ class ItemServiceTest {
         assertThrows(InvalidDateException.class, () -> service.verifyDate(oderRequestDTO));
     }
 
-    //Tirar dúvida
-//    @Test
-//    void shouldMerge() {
-//        Map<String, Object> sourceData = new HashMap<>();
-//        Object obj = new Object();
-//        Item item = createObject.item();
-//        sourceData.put("name", item);
-//
-//        Mockito.when(objectMapper.convertValue(sourceData, Item.class)).thenReturn(item);
-//        Mockito.when(ReflectionUtils.findField(Item.class, "name")).thenReturn(field);
-//        Mockito.when(ReflectionUtils.getField(any(), any())).thenReturn(obj);
-////        Mockito.when(ReflectionUtils.setField(field, item , obj));
-//        service.merge(sourceData, item);
-//
-//        assertNotEquals(item.getName(), sourceData.values());
-//    }
+    @Test
+    void shouldMerge() {
+        Map<String, Object> sourceData = new HashMap<>();
+        Item item = createObject.item();
+        sourceData.put("creation", "01-01-2023");
+        service.merge(sourceData, item);
+        assertNotEquals(sourceData.get("creation"), item.getCreation());
+    }
 
 }

@@ -5,6 +5,7 @@ import br.com.compass.sprint6.msOrder.exceptions.response.InvalidDateException;
 import br.com.compass.sprint6.msOrder.exceptions.response.ItemNotFoundException;
 import br.com.compass.sprint6.msOrder.repository.ItemRepository;
 import br.com.compass.sprint6.msOrder.service.assembler.ItemDTOAssembler;
+import br.com.compass.sprint6.msOrder.service.dto.request.ItemRequestDTO;
 import br.com.compass.sprint6.msOrder.service.dto.request.OrderRequestDTO;
 import br.com.compass.sprint6.msOrder.service.dto.response.ItemResumeResponseDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,6 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -45,8 +48,23 @@ public class ItemService {
 
     public void verifyDate(OrderRequestDTO request) {
         log.info("Chamando método verifyDate - Service Item");
-        request.getItems().forEach(data -> {if (data.getCreation().isAfter(data.getExpiration())) {
-            throw new InvalidDateException();}});
+        request.getItems().forEach(data -> {
+            if (data.getCreation().isAfter(data.getExpiration())) {
+                throw new InvalidDateException();
+            }
+        });
+    }
+
+    public void getTotal(OrderRequestDTO request) {
+        log.info("Chamando método getTotal - Service Item");
+        BigDecimal b = new BigDecimal("0");
+        List<ItemRequestDTO> items = request.getItems();
+
+        for(ItemRequestDTO itemRequestDTO : items){
+            b = b.add(itemRequestDTO.getPrice());
+            request.setTotal(b);
+        }
+
     }
 
     public void merge(Map<String, Object> sourceData, Item itemDestiny) {

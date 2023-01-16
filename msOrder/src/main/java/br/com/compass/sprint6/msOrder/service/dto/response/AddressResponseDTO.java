@@ -1,10 +1,8 @@
 package br.com.compass.sprint6.msOrder.service.dto.response;
 
-import lombok.Builder;
 import lombok.Data;
 
 @Data
-@Builder
 public class AddressResponseDTO {
     private Long id;
     private String street;

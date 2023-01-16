@@ -78,7 +78,6 @@ class OderControllerTest {
 
     @Test
     void updateItens() throws Exception {
-//        Map<String, Object> fields = Map<>;
         ItemResumeResponseDTO request = createObject.getItemResumeResponseDTO();
         String input = TestUtils.mapToJson(request);
 

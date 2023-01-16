@@ -80,13 +80,13 @@ public class CreateObject {
     }
 
     public AddressResponseDTO getAddressResponseDTO() {
-        return AddressResponseDTO.builder()
-                .cep("40430390")
-                .city("SA")
-                .neighborhood("Vila Rui Barbosa")
-                .street("Rua sete de abril")
-                .number("9A")
-                .build();
+        AddressResponseDTO addressResponseDTO = new AddressResponseDTO();
+        addressResponseDTO.setCep("40430390");
+        addressResponseDTO.setCity("SA");
+        addressResponseDTO.setNeighborhood("Vila Rui Barbosa");
+        addressResponseDTO.setStreet("Rua sete de abril");
+        addressResponseDTO.setNumber("9A");
+        return addressResponseDTO;
     }
 
     public ItemResponseDTO getItemsResponseDTO() {
