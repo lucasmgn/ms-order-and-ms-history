@@ -1,17 +1,16 @@
 package br.com.compass.sprint6.msOrder.utils;
 
-import br.com.compass.sprint6.msOrder.entities.Item;
-import br.com.compass.sprint6.msOrder.entities.Order;
-import br.com.compass.sprint6.msOrder.service.assembler.ItemDTOAssembler;
-import br.com.compass.sprint6.msOrder.service.assembler.ItemInputDisassembler;
-import br.com.compass.sprint6.msOrder.service.assembler.OrderInputDisassembler;
-import br.com.compass.sprint6.msOrder.service.dto.request.AddressResumeRequestDTO;
-import br.com.compass.sprint6.msOrder.service.dto.request.ItemRequestDTO;
-import br.com.compass.sprint6.msOrder.service.dto.request.OrderRequestDTO;
-import br.com.compass.sprint6.msOrder.service.dto.response.AddressResponseDTO;
-import br.com.compass.sprint6.msOrder.service.dto.response.ItemResponseDTO;
-import br.com.compass.sprint6.msOrder.service.dto.response.ItemResumeResponseDTO;
-import br.com.compass.sprint6.msOrder.service.dto.response.OrderResponseDTO;
+import br.com.compass.sprint6.msOrder.domain.model.Item;
+import br.com.compass.sprint6.msOrder.domain.model.Order;
+import br.com.compass.sprint6.msOrder.application.service.assembler.ItemDTOAssembler;
+import br.com.compass.sprint6.msOrder.application.service.assembler.OrderInputDisassembler;
+import br.com.compass.sprint6.msOrder.domain.dto.request.AddressResumeRequestDTO;
+import br.com.compass.sprint6.msOrder.domain.dto.request.ItemRequestDTO;
+import br.com.compass.sprint6.msOrder.domain.dto.request.OrderRequestDTO;
+import br.com.compass.sprint6.msOrder.domain.dto.response.AddressResponseDTO;
+import br.com.compass.sprint6.msOrder.domain.dto.response.ItemResponseDTO;
+import br.com.compass.sprint6.msOrder.domain.dto.response.ItemResumeResponseDTO;
+import br.com.compass.sprint6.msOrder.domain.dto.response.OrderResponseDTO;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

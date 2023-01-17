@@ -1,14 +1,13 @@
 package br.com.compass.sprint6.msOrder.service;
 
-import br.com.compass.sprint6.msOrder.entities.Item;
-import br.com.compass.sprint6.msOrder.exceptions.response.InvalidDateException;
-import br.com.compass.sprint6.msOrder.exceptions.response.ItemNotFoundException;
-import br.com.compass.sprint6.msOrder.repository.ItemRepository;
-import br.com.compass.sprint6.msOrder.service.assembler.ItemDTOAssembler;
-import br.com.compass.sprint6.msOrder.service.dto.request.ItemRequestDTO;
-import br.com.compass.sprint6.msOrder.service.dto.request.OrderRequestDTO;
-import br.com.compass.sprint6.msOrder.service.dto.response.ItemResponseDTO;
-import br.com.compass.sprint6.msOrder.service.dto.response.ItemResumeResponseDTO;
+import br.com.compass.sprint6.msOrder.application.service.ItemService;
+import br.com.compass.sprint6.msOrder.domain.model.Item;
+import br.com.compass.sprint6.msOrder.framework.exceptions.response.InvalidDateException;
+import br.com.compass.sprint6.msOrder.framework.exceptions.response.ItemNotFoundException;
+import br.com.compass.sprint6.msOrder.framework.adapter.out.database.ItemRepository;
+import br.com.compass.sprint6.msOrder.application.service.assembler.ItemDTOAssembler;
+import br.com.compass.sprint6.msOrder.domain.dto.request.OrderRequestDTO;
+import br.com.compass.sprint6.msOrder.domain.dto.response.ItemResumeResponseDTO;
 import br.com.compass.sprint6.msOrder.utils.CreateObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -18,13 +17,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.util.ReflectionUtils;
 
-import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 

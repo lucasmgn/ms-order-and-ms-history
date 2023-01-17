@@ -1,9 +1,9 @@
 package br.com.compass.sprint6.msOrder.handler;
 
-import br.com.compass.sprint6.msOrder.exceptions.handler.RestExceptionHandler;
-import br.com.compass.sprint6.msOrder.exceptions.response.InvalidDateException;
-import br.com.compass.sprint6.msOrder.exceptions.response.ItemNotFoundException;
-import br.com.compass.sprint6.msOrder.exceptions.response.OrderNotFoundException;
+import br.com.compass.sprint6.msOrder.framework.exceptions.handler.RestExceptionHandler;
+import br.com.compass.sprint6.msOrder.framework.exceptions.response.InvalidDateException;
+import br.com.compass.sprint6.msOrder.framework.exceptions.response.ItemNotFoundException;
+import br.com.compass.sprint6.msOrder.framework.exceptions.response.OrderNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

@@ -1,14 +1,15 @@
 package br.com.compass.sprint6.msOrder.service;
 
-import br.com.compass.sprint6.msOrder.entities.Address;
-import br.com.compass.sprint6.msOrder.repository.AddressRepository;
-import br.com.compass.sprint6.msOrder.service.assembler.AddressDTOAssembler;
-import br.com.compass.sprint6.msOrder.service.assembler.AddressInputDisassembler;
-import br.com.compass.sprint6.msOrder.service.dto.request.AddressResumeRequestDTO;
-import br.com.compass.sprint6.msOrder.service.dto.request.OrderRequestDTO;
-import br.com.compass.sprint6.msOrder.service.dto.response.AddressResponseViaCepDTO;
+import br.com.compass.sprint6.msOrder.application.service.AddressService;
+import br.com.compass.sprint6.msOrder.domain.model.Address;
+import br.com.compass.sprint6.msOrder.framework.adapter.out.database.AddressRepository;
+import br.com.compass.sprint6.msOrder.application.service.assembler.AddressDTOAssembler;
+import br.com.compass.sprint6.msOrder.application.service.assembler.AddressInputDisassembler;
+import br.com.compass.sprint6.msOrder.domain.dto.request.AddressResumeRequestDTO;
+import br.com.compass.sprint6.msOrder.domain.dto.request.OrderRequestDTO;
+import br.com.compass.sprint6.msOrder.domain.dto.response.AddressResponseViaCepDTO;
 import br.com.compass.sprint6.msOrder.utils.CreateObject;
-import br.com.compass.sprint6.msOrder.viacep.ViaCepClient;
+import br.com.compass.sprint6.msOrder.framework.adapter.out.viacep.ViaCepClient;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
