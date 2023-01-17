@@ -45,7 +45,7 @@ public class AddressService {
         return byCepAndNumber;
     }
 
-    private void addressViaCep(OrderRequestDTO request) {
+    public void addressViaCep(OrderRequestDTO request) {
         log.info("Chamando método addressViaCep - Service Address");
         String cep = request.getAddress().getCep().replaceAll("[^0-9]", "");
         request.getAddress().setCep(cep);

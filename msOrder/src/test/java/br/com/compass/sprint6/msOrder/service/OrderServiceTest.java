@@ -54,6 +54,8 @@ class OrderServiceTest {
     @Mock
     private ItemService itemService;
     @Mock
+    private AddressService addressService;
+    @Mock
     private Pageable pageable;
     @Mock
     private ViaCepClient client;
@@ -86,10 +88,8 @@ class OrderServiceTest {
     void shouldCreateOrder_success() {
         OrderRequestDTO request = createObject.getOderRequestDTO();
         OrderResponseDTO response = createObject.getOderResponseDTO();
-        AddressResponseViaCepDTO addressResponseViaCepDTO = new AddressResponseViaCepDTO();
         Order order = new Order();
 
-        Mockito.when(client.find(request.getAddress().getCep())).thenReturn(addressResponseViaCepDTO);
         Mockito.when(disassembler.toDomainObject(any())).thenReturn(order);
         Mockito.when(repository.save(any())).thenReturn(order);
         Mockito.when(assembler.toModel(any())).thenReturn(response);
