@@ -1,0 +1,16 @@
+spring:
+  kafka:
+    consumer:
+      auto-offset-reset: earliest
+      bootstrap-servers: 127.0.0.1:9092
+      group-id: group_id
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.JsonDeserializer
+topic:
+  name:
+    consumer: topico.comando.teste
+auto:
+  create:
+    topics:
+      enable: 'true'
+

@@ -17,7 +17,7 @@ spring:
 kafka: producer.bootstrap-servers=127.0.0.1:9092
 topic:
   name:
-    producer: topico.comando.order
+    producer: topico.comando.test
   
   # Common Kafka Properties
   auto:
