@@ -3,6 +3,7 @@ package br.com.compass.sprint6.msOrder.rest;
 import br.com.compass.sprint6.msOrder.application.service.ItemService;
 import br.com.compass.sprint6.msOrder.application.service.OrderService;
 import br.com.compass.sprint6.msOrder.domain.dto.request.OrderRequestDTO;
+import br.com.compass.sprint6.msOrder.domain.dto.request.OrderUpdateRequest;
 import br.com.compass.sprint6.msOrder.domain.dto.response.ItemResumeResponseDTO;
 import br.com.compass.sprint6.msOrder.domain.dto.response.OrderResponseDTO;
 import br.com.compass.sprint6.msOrder.framework.adapter.in.rest.OrderController;
@@ -106,7 +107,7 @@ class OderControllerTest {
 
     @Test
     void update() throws Exception {
-        OrderRequestDTO request = createObject.getOderRequestDTO();
+        OrderUpdateRequest request = new OrderUpdateRequest();
         String input = TestUtils.mapToJson(request);
 
         MvcResult result = mvc

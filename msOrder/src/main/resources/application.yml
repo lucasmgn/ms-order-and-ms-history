@@ -7,3 +7,20 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     show-sql: false
+
+  # Producer properties
+  kafka:
+    producer:
+      value-serializer: org.apache.kafka.common.serialization.JsonDeserializer
+      group-id: group_id
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+kafka: producer.bootstrap-servers=127.0.0.1:9092
+topic:
+  name:
+    producer: topico.comando.order
+  
+  # Common Kafka Properties
+  auto:
+    create:
+      topics:
+        enable: 'true'
