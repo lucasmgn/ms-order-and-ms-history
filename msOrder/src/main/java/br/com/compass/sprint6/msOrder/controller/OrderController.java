@@ -5,6 +5,7 @@ import br.com.compass.sprint6.msOrder.service.ItemService;
 import br.com.compass.sprint6.msOrder.service.OrderService;
 import br.com.compass.sprint6.msOrder.service.dto.request.OrderRequestDTO;
 import br.com.compass.sprint6.msOrder.service.dto.request.OrderResumeRequestDTO;
+import br.com.compass.sprint6.msOrder.service.dto.request.OrderUpdateRequest;
 import br.com.compass.sprint6.msOrder.service.dto.response.ItemResumeResponseDTO;
 import br.com.compass.sprint6.msOrder.service.dto.response.OrderResponseDTO;
 import jakarta.validation.Valid;
@@ -59,7 +60,7 @@ public class OrderController {
     }
 
     @PutMapping("/api/pedidos/{id}")
-    public ResponseEntity<OrderResponseDTO> update(@PathVariable("id") Long id, @RequestBody @Valid OrderResumeRequestDTO request){
+    public ResponseEntity<OrderResponseDTO> update(@PathVariable("id") Long id, @RequestBody @Valid OrderUpdateRequest request){
         log.info("Atualizando Order...");
         OrderResponseDTO orderResponseDTO = service.update(id, request);
         return ResponseEntity.status(HttpStatus.OK).body(orderResponseDTO);

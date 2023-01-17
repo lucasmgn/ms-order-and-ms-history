@@ -9,6 +9,7 @@ import br.com.compass.sprint6.msOrder.service.assembler.OrderDTOAssembler;
 import br.com.compass.sprint6.msOrder.service.assembler.OrderInputDisassembler;
 import br.com.compass.sprint6.msOrder.service.dto.request.OrderRequestDTO;
 import br.com.compass.sprint6.msOrder.service.dto.request.OrderResumeRequestDTO;
+import br.com.compass.sprint6.msOrder.service.dto.request.OrderUpdateRequest;
 import br.com.compass.sprint6.msOrder.service.dto.response.OrderResponseDTO;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -44,7 +45,7 @@ public class OrderService {
         return assembler.toModel(order);
     }
 
-    public OrderResponseDTO update(Long id, OrderResumeRequestDTO request) {
+    public OrderResponseDTO update(Long id, OrderUpdateRequest request) {
         log.info("Chamando método update - Service Order");
         Order order = fetchOrFail(id);
         disassembler.copyToDomainObject(request, order);

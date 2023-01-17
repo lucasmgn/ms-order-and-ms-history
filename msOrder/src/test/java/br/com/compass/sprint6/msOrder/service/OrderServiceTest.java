@@ -9,6 +9,7 @@ import br.com.compass.sprint6.msOrder.service.assembler.OrderDTOAssembler;
 import br.com.compass.sprint6.msOrder.service.assembler.OrderInputDisassembler;
 import br.com.compass.sprint6.msOrder.service.dto.request.OrderRequestDTO;
 import br.com.compass.sprint6.msOrder.service.dto.request.OrderResumeRequestDTO;
+import br.com.compass.sprint6.msOrder.service.dto.request.OrderUpdateRequest;
 import br.com.compass.sprint6.msOrder.service.dto.response.AddressResponseViaCepDTO;
 import br.com.compass.sprint6.msOrder.service.dto.response.OrderResponseDTO;
 import br.com.compass.sprint6.msOrder.utils.CreateObject;
@@ -126,7 +127,7 @@ class OrderServiceTest {
 
     @Test
     void shouldUpdateOrder_success() {
-        OrderResumeRequestDTO orderRequestDTO = new OrderResumeRequestDTO();
+        OrderUpdateRequest orderRequestDTO = new OrderUpdateRequest();
         orderRequestDTO.setTotal(new BigDecimal("10"));
         OrderResponseDTO response = new OrderResponseDTO();
         Order order = new Order();

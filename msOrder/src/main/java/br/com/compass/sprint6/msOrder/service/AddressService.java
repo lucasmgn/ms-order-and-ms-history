@@ -21,7 +21,6 @@ public class AddressService {
     private final AddressRepository repository;
     private final AddressDTOAssembler assembler;
     private final AddressInputDisassembler disassembler;
-
     private final ViaCepClient client;
 
     @Transactional
