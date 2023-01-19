@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Slf4j
@@ -33,11 +34,14 @@ public class HistoryService {
     }
 
     @Transactional
-    public HistoryResponseDTO create(HistoryRequestDTO history) {
+    public HistoryResponseDTO create(HistoryRequestDTO historyRequestDTO) {
         log.info("Chamando método create (salvando no repository) - Service History");
-        History history1 = disassembler.toDomainObject(history);
-        create(history1);
-        return assembler.toModel(history1);
+        History history = disassembler.toDomainObject(historyRequestDTO);
+        history.setIdOrder(historyRequestDTO.getId());
+        System.out.println(historyRequestDTO.getId());
+        history.setDate(LocalDate.now());
+        create(history);
+        return assembler.toModel(history);
     }
 
     public List<HistoryResponseDTO> findAll(){

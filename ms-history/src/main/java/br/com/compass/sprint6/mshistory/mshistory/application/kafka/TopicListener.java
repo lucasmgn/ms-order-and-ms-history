@@ -34,7 +34,6 @@ public class TopicListener {
         log.info("Partion: {}", payload.partition());
         log.info("Order: {}", payload.value());
 
-        System.out.println(payload.value());
         service.create(payload.value());
     }
 }

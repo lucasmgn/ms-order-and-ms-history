@@ -1,25 +1,35 @@
 spring:
   application:
     name: ms-history
+    main:
+      allow-bean-definition-overriding: true
   data:
     mongodb:
       uri: mongodb://localhost:27017/db_history
 
   kafka:
     consumer:
-      properties:
-        spring:
-          json:
-            trusted:
-              packages: "*"
       auto-offset-reset: earliest
       bootstrap-servers: 127.0.0.1:9092
       group-id: group_id
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            use:
+              type:
+                headers: 'false'
+            trusted:
+              packages: "*"
+            value:
+              default:
+                 type: br.com.compass.sprint6.mshistory.mshistory.domain.dto.request.HistoryRequestDTO
+trusted:
+  packages: "*"
 topic:
   name:
-    consumer: topico.comando.test
+    consumer: topic.order.history
 auto:
   create:
     topics:

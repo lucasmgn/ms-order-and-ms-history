@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class HistoryRequestDTO {
 
-    private Long idOrder;
+    private Long id;
     private BigDecimal total;
     private LocalDate date;
 }
