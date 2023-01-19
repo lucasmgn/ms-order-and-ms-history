@@ -1,6 +1,8 @@
 package br.com.compass.sprint6.mshistory.mshistory.application.service;
 
 import br.com.compass.sprint6.mshistory.mshistory.application.service.assembler.HistoryDTOAssembler;
+import br.com.compass.sprint6.mshistory.mshistory.application.service.assembler.HistoryInputDisassembler;
+import br.com.compass.sprint6.mshistory.mshistory.domain.dto.request.HistoryRequestDTO;
 import br.com.compass.sprint6.mshistory.mshistory.domain.dto.response.HistoryResponseDTO;
 import br.com.compass.sprint6.mshistory.mshistory.domain.model.History;
 import br.com.compass.sprint6.mshistory.mshistory.framework.adapter.out.database.HistoryRepository;
@@ -9,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -21,10 +24,20 @@ public class HistoryService {
 
     private final HistoryDTOAssembler assembler;
 
+    private final HistoryInputDisassembler disassembler;
+
     @Transactional
     public History create(History history) {
         log.info("Chamando método create (salvando no repository) - Service History");
         return repository.save(history);
+    }
+
+    @Transactional
+    public HistoryResponseDTO create(HistoryRequestDTO history) {
+        log.info("Chamando método create (salvando no repository) - Service History");
+        History history1 = disassembler.toDomainObject(history);
+        create(history1);
+        return assembler.toModel(history1);
     }
 
     public List<HistoryResponseDTO> findAll(){

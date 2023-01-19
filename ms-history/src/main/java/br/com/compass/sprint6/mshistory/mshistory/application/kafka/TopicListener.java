@@ -34,11 +34,7 @@ public class TopicListener {
         log.info("Partion: {}", payload.partition());
         log.info("Order: {}", payload.value());
 
-        HistoryRequestDTO value = payload.value();
-//        service.create(disassembler.toDomainObject(value));
-        History history = new History();
-        history.setDate(LocalDate.now());
-        history.setTotal(new BigDecimal("1"));
-        service.create(history);
+        System.out.println(payload.value());
+        service.create(payload.value());
     }
 }
