@@ -1,5 +1,6 @@
 package br.com.compass.sprint6.msOrder.application.service;
 
+import br.com.compass.sprint6.msOrder.application.kafkaServer.TopicProducer;
 import br.com.compass.sprint6.msOrder.application.service.assembler.OrderDTOAssembler;
 import br.com.compass.sprint6.msOrder.application.service.assembler.OrderInputDisassembler;
 import br.com.compass.sprint6.msOrder.domain.dto.request.OrderRequestDTO;
@@ -31,6 +32,7 @@ public class OrderService {
     private final AddressService addressService;
     private final ItemRepository itemRepository;
     private final ItemService itemService;
+    private final TopicProducer producer;
 
     public List<OrderResponseDTO> findAll(Pageable pageable) {
         log.info("Chamando método findAll - Service Order");
@@ -73,7 +75,9 @@ public class OrderService {
         order.setAddress(address);
         itemRepository.saveAll(order.getItems());
         order = create(order);
-        return assembler.toModel(order);
+        OrderResponseDTO orderResponseDTO = assembler.toModel(order);
+        producer.send(orderResponseDTO);
+        return orderResponseDTO;
     }
 
     @Transactional

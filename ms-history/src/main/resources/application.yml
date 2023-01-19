@@ -1,16 +1,29 @@
 spring:
+  application:
+    name: ms-history
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/db_history
+
   kafka:
     consumer:
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: "*"
       auto-offset-reset: earliest
       bootstrap-servers: 127.0.0.1:9092
       group-id: group_id
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.JsonDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
 topic:
   name:
-    consumer: topico.comando.teste
+    consumer: topico.comando.test
 auto:
   create:
     topics:
       enable: 'true'
 
+server:
+  port: '8085'

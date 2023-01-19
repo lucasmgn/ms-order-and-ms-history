@@ -11,7 +11,7 @@ spring:
   # Producer properties
   kafka:
     producer:
-      value-serializer: org.apache.kafka.common.serialization.JsonDeserializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       group-id: group_id
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
 kafka: producer.bootstrap-servers=127.0.0.1:9092

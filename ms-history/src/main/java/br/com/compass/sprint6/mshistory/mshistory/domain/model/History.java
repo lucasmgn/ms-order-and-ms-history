@@ -7,13 +7,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Document
+@Document(collection = "history")
 @Data
 public class History {
 
     @Id
     private String cod;
-    private Long id;
+    private Long idOder;
     private BigDecimal total;
     private LocalDate date;
 

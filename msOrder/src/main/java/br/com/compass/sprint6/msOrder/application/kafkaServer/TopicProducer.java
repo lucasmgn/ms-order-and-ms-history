@@ -17,8 +17,15 @@ public class TopicProducer {
 
     private final KafkaTemplate<String, OrderResponseDTO> kafkaTemplate;
 
+//    private final KafkaTemplate<String, String> kafkaTemplate;
+
     public void send(OrderResponseDTO message){
         log.info("Payload send: {}", message);
         kafkaTemplate.send(topicName, message);
     }
+
+//    public void send(String message){
+//        log.info("Payload send: {}", message);
+//        kafkaTemplate.send(topicName, message);
+//    }
 }

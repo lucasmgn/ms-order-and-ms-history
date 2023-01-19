@@ -9,7 +9,7 @@ import java.time.LocalDate;
 public class HistoryResponseDTO {
 
     private String cod;
-    private Long id;
+    private Long idOder;
     private BigDecimal total;
     private LocalDate date;
 }
