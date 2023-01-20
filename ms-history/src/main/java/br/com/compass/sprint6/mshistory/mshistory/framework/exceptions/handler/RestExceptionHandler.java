@@ -3,7 +3,6 @@ package br.com.compass.sprint6.mshistory.mshistory.framework.exceptions.handler;
 
 import br.com.compass.sprint6.mshistory.mshistory.domain.enums.ErrorCode;
 import br.com.compass.sprint6.mshistory.mshistory.framework.exceptions.response.ExceptionResponse;
-import br.com.compass.sprint6.mshistory.mshistory.framework.exceptions.response.HistoryNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 

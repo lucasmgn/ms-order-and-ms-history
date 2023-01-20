@@ -1,5 +1,6 @@
 package br.com.compass.sprint6.msOrder.service;
 
+import br.com.compass.sprint6.msOrder.application.kafkaServer.TopicProducer;
 import br.com.compass.sprint6.msOrder.application.service.AddressService;
 import br.com.compass.sprint6.msOrder.application.service.ItemService;
 import br.com.compass.sprint6.msOrder.application.service.OrderService;
@@ -61,6 +62,8 @@ class OrderServiceTest {
     private Pageable pageable;
     @Mock
     private ViaCepClient client;
+    @Mock
+    private TopicProducer producer;
     @InjectMocks
     private CreateObject createObject;
 
@@ -98,6 +101,7 @@ class OrderServiceTest {
 
         OrderResponseDTO orderResponseDTO = service.create(request);
         assertEquals(response.getCpf(), orderResponseDTO.getCpf());
+        verify(producer).send(any());
         verify(repository).save(any());
     }
 

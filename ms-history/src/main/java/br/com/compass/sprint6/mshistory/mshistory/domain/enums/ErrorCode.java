@@ -9,8 +9,7 @@ public enum ErrorCode {
 
     BAD_REQUEST("Requisição inválida"),
     INVALID_PARAMETER("Parâmetro Inválido!"),
-    INTERNAL_SERVER_ERROR("Ocorreu um erro interno."),
-    HISTORY_NOT_FOUND("Histórico não encontrado!");
+    INTERNAL_SERVER_ERROR("Ocorreu um erro interno.");
 
     private final String message;
 }

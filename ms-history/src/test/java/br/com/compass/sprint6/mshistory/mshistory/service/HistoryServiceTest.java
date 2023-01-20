@@ -18,6 +18,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -57,6 +58,9 @@ class HistoryServiceTest {
 
         HistoryResponseDTO response = new HistoryResponseDTO();
         response.setTotal(new BigDecimal("1"));
+        response.setIdOrder(1L);
+        response.setDate(LocalDate.now());
+        response.setCod("ALALALA");
 
         History history = new History();
         history.setTotal(new BigDecimal("1"));
@@ -67,6 +71,9 @@ class HistoryServiceTest {
 
         HistoryResponseDTO historyResponseDTO = service.create(request);
         assertEquals(response.getTotal(), historyResponseDTO.getTotal());
+        assertEquals(response.getCod(), historyResponseDTO.getCod());
+        assertEquals(response.getDate(), historyResponseDTO.getDate());
+        assertEquals(response.getIdOrder(), historyResponseDTO.getIdOrder());
         verify(repository).save(any());
     }
 }
