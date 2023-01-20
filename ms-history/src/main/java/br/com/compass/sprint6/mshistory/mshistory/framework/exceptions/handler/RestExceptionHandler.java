@@ -61,11 +61,4 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler{
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exceptionResponse);
     }
 
-    @ExceptionHandler(HistoryNotFoundException.class)
-    public final ResponseEntity<Object> handleOrderNotFoundException(HistoryNotFoundException ex) {
-        log.error(ex.getMessage(), ex);
-        ExceptionResponse exceptionResponse = new ExceptionResponse(ErrorCode.HISTORY_NOT_FOUND, ex);
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exceptionResponse);
-    }
-
 }

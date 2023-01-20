@@ -285,8 +285,8 @@ components:
           items:
             type: object
             oneOf:
-              - $ref: '#/components/schemas/ItemResponseDTO'
-              - $ref: '#/components/schemas/ItemResponseDTO'
+              - $ref: '#/components/schemas/ItemRequestDTO'
+              - $ref: '#/components/schemas/ItemRequestDTO'
         address:
           $ref: '#/components/schemas/AddressRequestDTO'
     OrderUpdateRequestDTO:
@@ -306,6 +306,24 @@ components:
         id:
           type: integer
           example: 1
+        name:
+          type: string
+          example: Meia
+        creation:
+          type: string
+          example: "03-12-2022"
+        expiration:
+          type: string
+          example: "03-12-2026"
+        price:
+          type: number
+          example: 25.5
+        description:
+          type: string
+          example: "Par de meias Compass.uol"
+    ItemRequestDTO:
+      type: object
+      properties:
         name:
           type: string
           example: Meia

@@ -47,8 +47,8 @@ class OderControllerTest {
 
     @Test
     void findAll() throws Exception {
-        List<OrderResponseDTO> companies = List.of(new OrderResponseDTO());
-        when(service.findAll(any(Pageable.class))).thenReturn(companies);
+        List<OrderResponseDTO> orders = List.of(new OrderResponseDTO());
+        when(service.findAll(any(Pageable.class))).thenReturn(orders);
         MvcResult result = mvc
                 .perform(MockMvcRequestBuilders.get(BASE_URL)
                         .accept(MediaType.APPLICATION_JSON)
