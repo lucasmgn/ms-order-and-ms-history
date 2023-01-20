@@ -1,0 +1,54 @@
+openapi: 3.0.1
+info:
+  title: MS - HISTORY
+  description:  Microserviço History
+  version: 0.1.2
+  termsOfService: https://github.com/lucasmgn/ms-sprint6
+  contact:
+    name: Lucas Magno Peixoto Lima
+    url: https://github.com/lucasmgn/ms-sprint6
+  license:
+    name: GPLv3
+    url: https://gnu.org/licenses/gpl-3.0.html
+servers:
+  - url: http://localhost:{port}
+    description: MS - HISTORY
+    variables:
+      port:
+        default: '8085'
+paths:
+  /api/history/:
+    get:
+      tags:
+        - History
+      operationId: findAll
+      summary: Lista todas Historys
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/HistoryResponseDTO'
+        '404':
+          description: NOT FOUND
+        '5XX':
+          description: INTERNAL SERVER ERROR
+
+components:
+  schemas:
+    HistoryResponseDTO:
+      type: object
+      properties:
+        cod:
+          type: string
+          example: 63c8a4ceef6eef678a35ea41
+        idOrder:
+          type: integer
+          example: 1
+        total:
+          type: number
+          example: 25.5
+        date:
+          type: string
+          example: "03-12-2022"

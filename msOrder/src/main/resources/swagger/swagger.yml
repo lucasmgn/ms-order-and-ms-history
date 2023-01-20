@@ -17,7 +17,7 @@ servers:
       port:
         default: '8080'
 paths:
-  /api/history/:
+  /api/pedidos/:
     post:
       tags:
         - Order
@@ -71,7 +71,7 @@ paths:
           description: NOT FOUND
         '5XX':
           description: INTERNAL SERVER ERROR
-  /api/history/{id}:
+  /api/pedidos/{id}:
     get:
       tags:
         - Order
