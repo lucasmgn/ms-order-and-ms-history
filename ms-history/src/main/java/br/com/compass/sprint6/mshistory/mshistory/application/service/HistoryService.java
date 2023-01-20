@@ -38,7 +38,6 @@ public class HistoryService {
         log.info("Chamando método create (salvando no repository) - Service History");
         History history = disassembler.toDomainObject(historyRequestDTO);
         history.setIdOrder(historyRequestDTO.getId());
-        System.out.println(historyRequestDTO.getId());
         history.setDate(LocalDate.now());
         create(history);
         return assembler.toModel(history);

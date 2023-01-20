@@ -1,0 +1,392 @@
+openapi: 3.0.1
+info:
+  title: MS - ORDER
+  description:  Microserviço Order
+  version: 0.1.2
+  termsOfService: https://github.com/lucasmgn/ms-sprint6
+  contact:
+    name: Lucas Magno Peixoto Lima
+    url: https://github.com/lucasmgn/ms-sprint6
+  license:
+    name: GPLv3
+    url: https://gnu.org/licenses/gpl-3.0.html
+servers:
+  - url: http://localhost:{port}
+    description: MS - ORDER
+    variables:
+      port:
+        default: '8080'
+paths:
+  /api/history/:
+    post:
+      tags:
+        - Order
+      operationId: create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderRequestDTO'
+        required: true
+      summary: Cadastra uma nova Order
+      responses:
+        '201':
+          description: CREATED
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OrderResponseDTO'
+        '400':
+          description: BAD REQUEST
+          content:
+            application/json:
+              example: {
+                "code": "BAD_REQUEST",
+                "message": "Requisição inválida",
+                "details": [
+                  "name: não deve estar em branco"
+                ]
+              }
+        '5XX':
+          description: "INTERNAL SERVER ERROR"
+    get:
+      tags:
+        - Order
+      operationId: findAll
+      parameters:
+        - name: pageable
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/Pageable'
+      summary: Lista todos os Orders
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OrderResponseDTO'
+        '404':
+          description: NOT FOUND
+        '5XX':
+          description: INTERNAL SERVER ERROR
+  /api/history/{id}:
+    get:
+      tags:
+        - Order
+      operationId: findById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      summary: Lista Order por ID
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OrderResponseDTO'
+        '400':
+          description: BAD REQUEST
+        '404':
+          description: NOT FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderNotFound'
+        '5XX':
+          description: "INTERNAL SERVER ERROR"
+    put:
+      tags:
+        - Order
+      operationId: update
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderUpdateRequestDTO'
+        required: true
+      summary: Atualiza uma Order por ID
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OrderResponseDTO'
+        '400':
+          description: BAD REQUEST
+          content:
+            application/json:
+              example: {
+                "code": "BAD_REQUEST",
+                "message": "Requisição Inválida",
+                "details": [
+                  "total: não deve estar em branco"
+                ]
+              }
+        '404':
+          description: NOT FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderNotFound'
+        '5XX':
+          description: "INTERNAL SERVER ERROR"
+    delete:
+      tags:
+        - Order
+      operationId: delete
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      summary: Exclui uma Order por ID
+      responses:
+        '204':
+          description: NO CONTENT
+        '404':
+          description: NOT FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderNotFound'
+        '5XX':
+          description: "INTERNAL SERVER ERROR"
+  /api/itens/{id}:
+    patch:
+      tags:
+        - Order
+      operationId: patch
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ItemPatchResponseDTO'
+        required: true
+      summary: Atualizar um Item por ID
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ItemResumeResponseDTO'
+        '404':
+          description: NOT FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemNotFound'
+        '5XX':
+          description: "INTERNAL SERVER ERROR"
+
+components:
+  schemas:
+    ItemPatchResponseDTO:
+      type: object
+      properties:
+        creation:
+          type: string
+          example: "03-12-2022"
+    ItemResumeResponseDTO:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Meia
+        creation:
+          type: string
+          example: "03-12-2022"
+        expiration:
+          type: string
+          example: "03-12-2026"
+        price:
+          type: number
+          example: 25.5
+        description:
+          type: string
+          example: "Par de meias Compass.uol"
+    OrderNotFound:
+      type: object
+      properties:
+        code:
+          type: string
+          example: ORDER_NOT_FOUND
+        message:
+          type: string
+          example: Pedido não encontrado!
+        details:
+          type: array
+          items:
+            type: string
+            example: ORDER_NOT_FOUND
+    ItemNotFound:
+      type: object
+      properties:
+        code:
+          type: string
+          example: ITEM_NOT_FOUND
+        message:
+          type: string
+          example: ITEM não encontrado!
+        details:
+          type: array
+          items:
+            type: string
+            example: ITEM_NOT_FOUND
+    OrderResponseDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        cpf:
+          type: string
+          example: '095.917.815-55'
+        items:
+          type: array
+          items:
+            type: object
+            oneOf:
+              - $ref: '#/components/schemas/ItemResponseDTO'
+              - $ref: '#/components/schemas/ItemResponseDTO'
+        total:
+          type: number
+          example: 51.00
+        address:
+          $ref: '#/components/schemas/AddressResponseDTO'
+    OrderRequestDTO:
+      type: object
+      properties:
+        cpf:
+          type: string
+          example: '095.917.815-55'
+        items:
+          type: array
+          items:
+            type: object
+            oneOf:
+              - $ref: '#/components/schemas/ItemResponseDTO'
+              - $ref: '#/components/schemas/ItemResponseDTO'
+        address:
+          $ref: '#/components/schemas/AddressRequestDTO'
+    OrderUpdateRequestDTO:
+      type: object
+      properties:
+        cpf:
+          type: string
+          example: '095.917.815-55'
+        total:
+          type: number
+          example: 365
+        address:
+          $ref: '#/components/schemas/AddressResumeResponseDTO'
+    ItemResponseDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: Meia
+        creation:
+          type: string
+          example: "03-12-2022"
+        expiration:
+          type: string
+          example: "03-12-2026"
+        price:
+          type: number
+          example: 25.5
+        description:
+          type: string
+          example: "Par de meias Compass.uol"
+    AddressResponseDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        street:
+          type: string
+          example: 'Rua Sete de Abril'
+        number:
+          type: string
+          example: "9A"
+        neighborhood:
+          type: string
+          example: "Vila Ruy Barbosa"
+        city:
+          type: string
+          example: "Salvador"
+        state:
+          type: string
+          example: "BA"
+        cep:
+          type: string
+          example: "40430390"
+    AddressResumeResponseDTO:
+      type: object
+      properties:
+        street:
+          type: string
+          example: 'Rua Sete de Abril'
+        number:
+          type: string
+          example: "9A"
+        neighborhood:
+          type: string
+          example: "Vila Ruy Barbosa"
+        city:
+          type: string
+          example: "Salvador"
+        state:
+          type: string
+          example: "BA"
+        cep:
+          type: string
+          example: "40430390"
+    AddressRequestDTO:
+      type: object
+      properties:
+        cep:
+          type: string
+          example: "40430390"
+        number:
+          type: string
+          example: "9A"
+    Pageable:
+      type: object
+      properties:
+        cpf:
+          type: string
+          example: "095.917.815-55"
+        sort:
+          type: array
+          items:
+            type: string
+            enum:
+              - total,desc
+              - idDesc
+              - nameAsc
+              - nameDesc
