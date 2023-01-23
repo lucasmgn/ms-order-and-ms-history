@@ -8,8 +8,11 @@ import br.com.compass.sprint6.mshistory.mshistory.domain.model.History;
 import br.com.compass.sprint6.mshistory.mshistory.framework.adapter.out.database.HistoryRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -43,7 +46,22 @@ public class HistoryService {
 
     public List<HistoryResponseDTO> findAll(){
         log.info("Chamando método findAll - Service History");
-        List<History> histories = repository.findAll();
+        List<History> histories = repository.findAll(Sort.by(Sort.Direction.DESC, "date"));
         return assembler.toCollectionModel(histories);
+    }
+
+    public List<HistoryResponseDTO> findAllDate(LocalDate inicio, LocalDate fim){
+        log.info("Chamando método findAllDate - Service History");
+        List<History> histories = repository.findByDateBetween(inicio,fim);
+        return assembler.toCollectionModel(histories);
+    }
+
+    public List<HistoryResponseDTO> verify(LocalDate inicio, LocalDate fim){
+        log.info("Chamando método verify - Service History");
+        if(inicio == null || fim == null){
+            return findAll();
+        }else{
+            return findAllDate(inicio, fim);
+        }
     }
 }
