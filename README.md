@@ -30,4 +30,31 @@ projetos foram:
 
 ![](./docs/image-service-and-viacep.png)
 
-<h2>Postman</h2>
+<h3>Postman</h3>
+
+<h3>Listar</h3>
+<p>Podendo filtrar por cpf e por maior valor (atenção na pesquisa por cpf, ela precisa ser igual ao cadastrado)</p>
+
+![](./docs/listar-order.png)
+
+<h3>Buscar</h3>
+<p>Caso o ID não exista, retornará 404 not found</p>
+
+![](./docs/buscar-id.png)
+
+<h3>Deletar</h3>
+<p>Caso o ID não exista, retornará 404 not found como na imagem abaixo, se existir retornará 204 no content</p>
+
+![](./docs/delete-order.png)
+
+<h3>Patch - items</h3>
+<p>Caso algum campo for violado, retornará uma mensagem de erro, informando o campo que está inválido e se o ID não existir retornará 404 com uma mensagem de erro</p>
+<p>Esse endpoint nos permite alterar um ou vários atributos do objeto Item</p>
+
+![](./docs/patch-response.png)
+
+<h3>Atualizar</h3>
+<p>Caso algum campo for violado, retornará uma mensagem de erro, informando o campo que está inválido e se o ID não existir retornará 404 com uma mensagem de erro</p>
+<p>Esse endpoint nos permite alterar apenas cpf, total e o objeto address</p>
+
+![](./docs/atualizar-order.png)
