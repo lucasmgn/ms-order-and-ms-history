@@ -1,7 +1,7 @@
 package br.com.compass.sprint6.msOrder.assembler;
 
 import br.com.compass.sprint6.msOrder.domain.model.Item;
-import br.com.compass.sprint6.msOrder.application.service.assembler.ItemInputDisassembler;
+import br.com.compass.sprint6.msOrder.application.service.mapper.ItemInputDisassembler;
 import br.com.compass.sprint6.msOrder.domain.dto.request.ItemRequestDTO;
 import br.com.compass.sprint6.msOrder.utils.CreateObject;
 import org.junit.jupiter.api.Assertions;

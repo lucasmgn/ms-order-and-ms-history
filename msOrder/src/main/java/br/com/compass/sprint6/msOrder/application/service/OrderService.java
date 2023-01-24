@@ -1,8 +1,8 @@
 package br.com.compass.sprint6.msOrder.application.service;
 
-import br.com.compass.sprint6.msOrder.application.kafkaServer.TopicProducer;
-import br.com.compass.sprint6.msOrder.application.service.assembler.OrderDTOAssembler;
-import br.com.compass.sprint6.msOrder.application.service.assembler.OrderInputDisassembler;
+import br.com.compass.sprint6.msOrder.framework.adapter.out.event.TopicProducer;
+import br.com.compass.sprint6.msOrder.application.service.mapper.OrderDTOAssembler;
+import br.com.compass.sprint6.msOrder.application.service.mapper.OrderInputDisassembler;
 import br.com.compass.sprint6.msOrder.domain.dto.request.OrderRequestDTO;
 import br.com.compass.sprint6.msOrder.domain.dto.request.OrderUpdateRequest;
 import br.com.compass.sprint6.msOrder.domain.dto.response.OrderResponseDTO;

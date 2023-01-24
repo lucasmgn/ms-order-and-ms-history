@@ -1,4 +1,4 @@
-package br.com.compass.sprint6.mshistory.mshistory.application.service.assembler;
+package br.com.compass.sprint6.mshistory.mshistory.application.service.mapper;
 
 import br.com.compass.sprint6.mshistory.mshistory.domain.dto.response.HistoryResponseDTO;
 import br.com.compass.sprint6.mshistory.mshistory.domain.model.History;

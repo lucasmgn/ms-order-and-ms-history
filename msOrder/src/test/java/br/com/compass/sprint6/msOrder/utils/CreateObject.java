@@ -2,8 +2,8 @@ package br.com.compass.sprint6.msOrder.utils;
 
 import br.com.compass.sprint6.msOrder.domain.model.Item;
 import br.com.compass.sprint6.msOrder.domain.model.Order;
-import br.com.compass.sprint6.msOrder.application.service.assembler.ItemDTOAssembler;
-import br.com.compass.sprint6.msOrder.application.service.assembler.OrderInputDisassembler;
+import br.com.compass.sprint6.msOrder.application.service.mapper.ItemDTOAssembler;
+import br.com.compass.sprint6.msOrder.application.service.mapper.OrderInputDisassembler;
 import br.com.compass.sprint6.msOrder.domain.dto.request.AddressResumeRequestDTO;
 import br.com.compass.sprint6.msOrder.domain.dto.request.ItemRequestDTO;
 import br.com.compass.sprint6.msOrder.domain.dto.request.OrderRequestDTO;

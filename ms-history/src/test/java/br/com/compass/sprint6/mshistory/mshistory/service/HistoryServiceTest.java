@@ -1,8 +1,8 @@
 package br.com.compass.sprint6.mshistory.mshistory.service;
 
 import br.com.compass.sprint6.mshistory.mshistory.application.service.HistoryService;
-import br.com.compass.sprint6.mshistory.mshistory.application.service.assembler.HistoryDTOAssembler;
-import br.com.compass.sprint6.mshistory.mshistory.application.service.assembler.HistoryInputDisassembler;
+import br.com.compass.sprint6.mshistory.mshistory.application.service.mapper.HistoryDTOAssembler;
+import br.com.compass.sprint6.mshistory.mshistory.application.service.mapper.HistoryInputDisassembler;
 import br.com.compass.sprint6.mshistory.mshistory.domain.dto.request.HistoryRequestDTO;
 import br.com.compass.sprint6.mshistory.mshistory.domain.dto.response.HistoryResponseDTO;
 import br.com.compass.sprint6.mshistory.mshistory.domain.model.History;
@@ -13,9 +13,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

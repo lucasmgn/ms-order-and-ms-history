@@ -1,13 +1,12 @@
 package br.com.compass.sprint6.msOrder.framework.adapter.in.rest;
 
-import br.com.compass.sprint6.msOrder.application.kafkaServer.TopicProducer;
-import br.com.compass.sprint6.msOrder.domain.model.Item;
 import br.com.compass.sprint6.msOrder.application.service.ItemService;
 import br.com.compass.sprint6.msOrder.application.service.OrderService;
 import br.com.compass.sprint6.msOrder.domain.dto.request.OrderRequestDTO;
 import br.com.compass.sprint6.msOrder.domain.dto.request.OrderUpdateRequest;
 import br.com.compass.sprint6.msOrder.domain.dto.response.ItemResumeResponseDTO;
 import br.com.compass.sprint6.msOrder.domain.dto.response.OrderResponseDTO;
+import br.com.compass.sprint6.msOrder.domain.model.Item;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,8 +27,6 @@ public class OrderController {
     private final OrderService service;
 
     private final ItemService itemService;
-
-//    private final TopicProducer producer;
 
     @PostMapping("/api/pedidos/")
     public ResponseEntity<OrderResponseDTO> create(@RequestBody @Valid OrderRequestDTO request) {

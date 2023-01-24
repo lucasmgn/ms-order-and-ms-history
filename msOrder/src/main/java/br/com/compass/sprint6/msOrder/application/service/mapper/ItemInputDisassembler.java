@@ -1,4 +1,4 @@
-package br.com.compass.sprint6.msOrder.application.service.assembler;
+package br.com.compass.sprint6.msOrder.application.service.mapper;
 
 import br.com.compass.sprint6.msOrder.domain.dto.request.ItemRequestDTO;
 import br.com.compass.sprint6.msOrder.domain.model.Item;

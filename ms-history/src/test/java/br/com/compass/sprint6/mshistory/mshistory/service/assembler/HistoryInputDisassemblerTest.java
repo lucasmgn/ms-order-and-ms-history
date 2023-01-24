@@ -1,6 +1,6 @@
 package br.com.compass.sprint6.mshistory.mshistory.service.assembler;
 
-import br.com.compass.sprint6.mshistory.mshistory.application.service.assembler.HistoryInputDisassembler;
+import br.com.compass.sprint6.mshistory.mshistory.application.service.mapper.HistoryInputDisassembler;
 import br.com.compass.sprint6.mshistory.mshistory.domain.dto.request.HistoryRequestDTO;
 import br.com.compass.sprint6.mshistory.mshistory.domain.model.History;
 import org.junit.jupiter.api.Assertions;

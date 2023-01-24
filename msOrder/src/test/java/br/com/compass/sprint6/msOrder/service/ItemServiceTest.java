@@ -5,7 +5,7 @@ import br.com.compass.sprint6.msOrder.domain.model.Item;
 import br.com.compass.sprint6.msOrder.framework.exceptions.response.InvalidDateException;
 import br.com.compass.sprint6.msOrder.framework.exceptions.response.ItemNotFoundException;
 import br.com.compass.sprint6.msOrder.framework.adapter.out.database.ItemRepository;
-import br.com.compass.sprint6.msOrder.application.service.assembler.ItemDTOAssembler;
+import br.com.compass.sprint6.msOrder.application.service.mapper.ItemDTOAssembler;
 import br.com.compass.sprint6.msOrder.domain.dto.request.OrderRequestDTO;
 import br.com.compass.sprint6.msOrder.domain.dto.response.ItemResumeResponseDTO;
 import br.com.compass.sprint6.msOrder.utils.CreateObject;

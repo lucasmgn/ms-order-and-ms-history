@@ -1,7 +1,7 @@
 package br.com.compass.sprint6.msOrder.application.service;
 
-import br.com.compass.sprint6.msOrder.application.service.assembler.AddressDTOAssembler;
-import br.com.compass.sprint6.msOrder.application.service.assembler.AddressInputDisassembler;
+import br.com.compass.sprint6.msOrder.application.service.mapper.AddressDTOAssembler;
+import br.com.compass.sprint6.msOrder.application.service.mapper.AddressInputDisassembler;
 import br.com.compass.sprint6.msOrder.domain.dto.request.AddressResumeRequestDTO;
 import br.com.compass.sprint6.msOrder.domain.dto.request.OrderRequestDTO;
 import br.com.compass.sprint6.msOrder.domain.dto.response.AddressResponseViaCepDTO;

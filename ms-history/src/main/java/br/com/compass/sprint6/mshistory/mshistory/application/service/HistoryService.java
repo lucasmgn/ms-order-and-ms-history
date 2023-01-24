@@ -1,18 +1,16 @@
 package br.com.compass.sprint6.mshistory.mshistory.application.service;
 
-import br.com.compass.sprint6.mshistory.mshistory.application.service.assembler.HistoryDTOAssembler;
-import br.com.compass.sprint6.mshistory.mshistory.application.service.assembler.HistoryInputDisassembler;
+import br.com.compass.sprint6.mshistory.mshistory.application.service.mapper.HistoryDTOAssembler;
+import br.com.compass.sprint6.mshistory.mshistory.application.service.mapper.HistoryInputDisassembler;
 import br.com.compass.sprint6.mshistory.mshistory.domain.dto.request.HistoryRequestDTO;
 import br.com.compass.sprint6.mshistory.mshistory.domain.dto.response.HistoryResponseDTO;
 import br.com.compass.sprint6.mshistory.mshistory.domain.model.History;
 import br.com.compass.sprint6.mshistory.mshistory.framework.adapter.out.database.HistoryRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 import java.util.List;
