@@ -58,3 +58,12 @@ projetos foram:
 <p>Esse endpoint nos permite alterar apenas cpf, total e o objeto address</p>
 
 ![](./docs/atualizar-order.png)
+
+<h3>Criar</h3>
+<p>Caso algum campo for violado, retornará uma mensagem de erro, informando o campo que está inválido</p>
+<p>Para esse endpoint é preciso está com o Kafka rodando no docker e subir também o ms-history</p>
+<p>A data estará como null porque ela é preenchida quando é salva no mongdb</p>
+
+![](./docs/docker-kafka.png)
+![](./docs/create-order.png)
+![](./docs/log-hisstory.png)
