@@ -67,3 +67,21 @@ projetos foram:
 ![](./docs/docker-kafka.png)
 ![](./docs/create-order.png)
 ![](./docs/log-hisstory.png)
+
+<h2>ms - history</h2>
+
+<h3> O ms-history é o microserviço consumer</h3>
+
+![](./docs/topic-consumer-history.png)
+
+
+<h3>Postman</h3>
+
+<h3>Listar</h3>
+<p>Listagem ocorre na ordem cronológica inversa, ou seja, listará do mais recente até o mais antigo, também possui o filtro entre duas datas, trazendo apenas o history das datas entre elas</p>
+
+![](./docs/listar-history.png)
+
+<p>Listando history com filtro de data inicio e fim</p>
+
+![](./docs/ordem-history.png)
