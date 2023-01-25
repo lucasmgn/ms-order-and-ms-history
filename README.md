@@ -72,7 +72,7 @@ cURL: curl --location --request GET 'http://localhost:8080/api/pedidos/'
 ```
 
 <h3>Buscar</h3>
-<p>Caso o ID não exista, retornará 404 not found</p>
+<p>Caso o ID não exista, retornará <strong>404 not found</strong></p>
 
 ````text
 cURL: curl --location --request GET 'http://localhost:8080/api/pedidos/1'
@@ -81,7 +81,7 @@ cURL: curl --location --request GET 'http://localhost:8080/api/pedidos/1'
 ![](./docs/buscar-id.png)
 
 <h3>Deletar</h3>
-<p>Caso o ID não exista, retornará 404 not found como na imagem abaixo, se existir retornará 204 no content</p>
+<p>Caso o ID não exista, retornará 404 not found como na imagem abaixo, se existir retornará <strong>204 no content</strong></p>
 
 ````text
 cURL: curl --location --request DELETE 'http://localhost:8080/api/pedidos/12'
@@ -90,7 +90,8 @@ cURL: curl --location --request DELETE 'http://localhost:8080/api/pedidos/12'
 ![](./docs/delete-order.png)
 
 <h3>Patch - items</h3>
-<p>Caso algum campo for violado, retornará uma mensagem de erro, informando o campo que está inválido e se o ID não existir retornará 404 com uma mensagem de erro</p>
+<p>Caso algum campo for violado, retornará uma mensagem de erro, informando o campo que está inválido e se o ID não existir retornará <strong>404 not
+found</strong> com uma mensagem de erro</p>
 <p>Esse endpoint nos permite alterar um ou vários atributos do objeto Item</p>
 
 ````text
@@ -105,7 +106,7 @@ cURL: curl --location --request PATCH 'http://localhost:8080/api/itens/2' \
 ![](./docs/patch-response.png)
 
 <h3>Atualizar</h3>
-<p>Caso algum campo for violado, retornará uma mensagem de erro, informando o campo que está inválido e se o ID não existir retornará 404 com uma mensagem de erro</p>
+<p>Caso algum campo for violado, retornará uma mensagem de erro, informando o campo que está inválido e se o ID não existir retornará <strong>404 not found</strong> com uma mensagem de erro</p>
 <p>Esse endpoint nos permite alterar apenas cpf, total e o objeto address</p>
 
 ````text
@@ -129,8 +130,8 @@ cURL: curl --location --request PUT 'http://localhost:8080/api/pedidos/2' \
 
 <h3>Criar</h3>
 <p>Caso algum campo for violado, retornará uma mensagem de erro, informando o campo que está inválido</p>
-<p>Para esse endpoint é preciso está com o Kafka rodando no docker e subir também o ms-history</p>
-<p>A data estará como null porque ela é preenchida quando é salva no Mongdb</p>
+<p>Para esse endpoint é preciso está com o <strong>Kafka</strong> rodando no <strong>Docker</strong> e subir também o <strong>ms-history</strong></p>
+<p>A data estará como null porque ela é preenchida quando é salva no <strong>Mongdb</strong></p>
 
 ````text
 cURL: curl --location --request POST 'http://localhost:8080/api/pedidos/' \
@@ -173,7 +174,7 @@ cURL: curl --location --request POST 'http://localhost:8080/api/pedidos/' \
 <h3>Postman</h3>
 
 <h3>Listar</h3>
-<p>Listagem ocorre na ordem cronológica inversa, ou seja, listará do mais recente até o mais antigo, também possui o filtro entre duas datas, trazendo apenas o history das datas entre elas</p>
+<p>Listagem ocorre na ordem <i><strong>cronológica inversa</strong></i>, ou seja, listará do mais recente até o mais antigo, também possui o filtro entre duas datas,<strong><i> trazendo apenas as histories das datas entre elas</strong></i></p>
 
 ````text
 cURL: curl --location --request GET 'http://localhost:8085/api/history/'
