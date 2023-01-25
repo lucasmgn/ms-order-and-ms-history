@@ -42,7 +42,7 @@ cURL: curl --location --request GET 'http://localhost:8080/api/pedidos/'
 
 ![](./docs/listar-order.png)
 
-<h4>Response Completo</h4>
+<h4>Response:</h4>
 
 ```json
 {
@@ -193,10 +193,10 @@ cURL: curl --location --request GET 'http://localhost:8085/api/history/?inicio=2
 
 ```json
 {
-"cod": "63c94e69cd8ff26bfb3fe67c",
-"idOrder": 26,
-"total": 60.00,
-"date": "19-01-2023"
+  "cod": "63c94e69cd8ff26bfb3fe67c",
+  "idOrder": 26,
+  "total": 60.00,
+  "date": "19-01-2023"
 },
 {
 "cod": "63c9fcb187a4923940bd8d14",
