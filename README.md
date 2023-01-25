@@ -1,7 +1,7 @@
 # ms-order and ms-history
 
 <h2> Informações</h2>
-Os microserviços Order e History podem ser rodados de maneira individual, porém para o endpoint <strong>CRIAR</strong> do Order às duas aplicações + o Kafka precisam estar "startados". 
+Os microserviços <strong>Order</strong> e <strong>History</strong> podem ser rodados de maneira individual, porém para o endpoint <strong>CRIAR</strong> do <strong>Order</strong> às duas aplicações + o <strong>Kafka</strong> precisam estar "startados". 
 
 Projetos de microserviços Order e History, as tecnologias usadas nesses
 projetos foram:
