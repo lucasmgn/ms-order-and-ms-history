@@ -182,7 +182,7 @@ cURL: curl --location --request GET 'http://localhost:8085/api/history/'
 
 ![](./docs/listar-history.png)
 
-<p>Listando history com filtro de data inicio e fim</p>
+<p>Listando history com filtro de data inicio e fim.</p>
 
 ````text
 cURL: curl --location --request GET 'http://localhost:8085/api/history/?inicio=2022-12-13&fim=2023-01-24'
