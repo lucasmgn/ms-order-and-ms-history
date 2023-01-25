@@ -6,9 +6,6 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum ErrorCode {
-
-    BAD_REQUEST("Requisição inválida"),
-    INVALID_PARAMETER("Parâmetro Inválido!"),
     INTERNAL_SERVER_ERROR("Ocorreu um erro interno.");
 
     private final String message;

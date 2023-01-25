@@ -224,3 +224,7 @@ cURL: curl --location --request GET 'http://localhost:8085/api/history/?inicio=2
 "date": "23-01-2023"
 }
 ```
+
+<h3>Testes:</h3>
+
+![](./docs/testesAll.png)

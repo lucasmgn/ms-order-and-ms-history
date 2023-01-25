@@ -1,6 +1,5 @@
 package br.com.compass.sprint6.mshistory.mshistory.domain.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -12,7 +11,6 @@ import java.time.LocalDate;
 @Data
 @Document
 @NoArgsConstructor
-@AllArgsConstructor
 public class History {
 
     @Id

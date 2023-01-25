@@ -7,12 +7,15 @@ import br.com.compass.sprint6.mshistory.mshistory.domain.dto.request.HistoryRequ
 import br.com.compass.sprint6.mshistory.mshistory.domain.dto.response.HistoryResponseDTO;
 import br.com.compass.sprint6.mshistory.mshistory.domain.model.History;
 import br.com.compass.sprint6.mshistory.mshistory.framework.adapter.out.database.HistoryRepository;
+import br.com.compass.sprint6.mshistory.mshistory.framework.exceptions.response.ExceptionResponse;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -37,16 +40,50 @@ class HistoryServiceTest {
 
 
     @Test
-    void shouldVerify_FindAll() {
+    void shouldVerify_findAll() {
         List<History> history = List.of(new History());
         List<HistoryResponseDTO> response = List.of(new HistoryResponseDTO());
 
-        Mockito.when(repository.findAll()).thenReturn(history);
+        Mockito.when(repository.findAll(Sort.by(Sort.Direction.DESC, "date"))).thenReturn(history);
         Mockito.when(assembler.toCollectionModel(history)).thenReturn(response);
 
         List<HistoryResponseDTO> all = service.findAll();
 
         assertEquals(history.get(0).getTotal(), all.get(0).getTotal());
+    }
+
+    @Test
+    void shouldVerify_findAllDate() {
+        List<History> history = List.of(new History());
+        List<HistoryResponseDTO> response = List.of(new HistoryResponseDTO());
+        LocalDate now = LocalDate.now();
+        LocalDate of = LocalDate.of(2023, 01, 24);
+
+        Mockito.when(repository.findByDateBetween(of,now)).thenReturn(history);
+        Mockito.when(assembler.toCollectionModel(history)).thenReturn(response);
+
+        List<HistoryResponseDTO> all = service.findAllDate(of, now);
+
+        assertEquals(history.get(0).getTotal(), all.get(0).getTotal());
+    }
+
+    @Test
+    void shouldVerify_verifyFindAllDate() {
+        LocalDate now = LocalDate.now();
+        LocalDate of = LocalDate.of(2023, 01, 24);
+
+        List<HistoryResponseDTO> verify = service.verify(now, of);
+
+        verify(repository).findByDateBetween(any(),any());
+    }
+
+    @Test
+    void shouldVerify_verifyFindAll() {
+        LocalDate of = LocalDate.of(2023, 01, 24);
+
+        List<HistoryResponseDTO> verify = service.verify(null, of);
+
+        verify(repository).findAll(Sort.by(Sort.Direction.DESC, "date"));
     }
 
     @Test

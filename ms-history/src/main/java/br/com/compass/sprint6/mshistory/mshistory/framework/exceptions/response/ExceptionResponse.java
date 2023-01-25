@@ -27,10 +27,4 @@ public class ExceptionResponse {
         this.message = errorCode.getMessage();
         this.details = Collections.singletonList(details);
     }
-
-    public ExceptionResponse(ErrorCode errorCode, List<String> details) {
-        this.code = errorCode.name();
-        this.message = errorCode.getMessage();
-        this.details = details;
-    }
 }

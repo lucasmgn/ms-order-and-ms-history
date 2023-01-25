@@ -14,8 +14,4 @@ public class HistoryInputDisassembler {
     public History toDomainObject(HistoryRequestDTO historyRequestDTO) {
         return modelMapper.map(historyRequestDTO, History.class);
     }
-
-    public void copyToDomainObject(HistoryRequestDTO historyRequestDTO, History history) {
-        modelMapper.map(historyRequestDTO, history);
-    }
 }
