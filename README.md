@@ -44,7 +44,8 @@ cURL: curl --location --request GET 'http://localhost:8080/api/pedidos/'
 
 <h4>Response Completo</h4>
 
-```{
+```json
+{
 "id": 1,
 "cpf": "9591781555",
 "items": [
@@ -68,7 +69,8 @@ cURL: curl --location --request GET 'http://localhost:8080/api/pedidos/'
 "cep": "49042-480"
 }
 }
-````
+```
+
 <h3>Buscar</h3>
 <p>Caso o ID não exista, retornará 404 not found</p>
 
@@ -189,7 +191,7 @@ cURL: curl --location --request GET 'http://localhost:8085/api/history/?inicio=2
 
 <h4>Response:</h4>
 
-````
+```json
 {
 "cod": "63c94e69cd8ff26bfb3fe67c",
 "idOrder": 26,
