@@ -35,7 +35,10 @@ projetos foram:
 
 <h3>Listar</h3>
 <p>Podendo filtrar por cpf e por maior valor (atenção na pesquisa por cpf, ela precisa ser igual ao cadastrado)</p>
-<p><strong>cURL:</strong> curl --location --request GET 'http://localhost:8080/api/pedidos/'</p>
+
+````text
+cURL: curl --location --request GET 'http://localhost:8080/api/pedidos/'
+````
 
 ![](./docs/listar-order.png)
 
@@ -68,32 +71,43 @@ projetos foram:
 ````
 <h3>Buscar</h3>
 <p>Caso o ID não exista, retornará 404 not found</p>
-<p><strong>cURL:</strong> curl --location --request GET 'http://localhost:8080/api/pedidos/1'</p>
+
+````text
+cURL: curl --location --request GET 'http://localhost:8080/api/pedidos/1'
+````
 
 ![](./docs/buscar-id.png)
 
 <h3>Deletar</h3>
 <p>Caso o ID não exista, retornará 404 not found como na imagem abaixo, se existir retornará 204 no content</p>
-<p><strong>cURL:</strong> curl --location --request DELETE 'http://localhost:8080/api/pedidos/12'</p>
+
+````text
+cURL: curl --location --request DELETE 'http://localhost:8080/api/pedidos/12'
+````
 
 ![](./docs/delete-order.png)
 
 <h3>Patch - items</h3>
 <p>Caso algum campo for violado, retornará uma mensagem de erro, informando o campo que está inválido e se o ID não existir retornará 404 com uma mensagem de erro</p>
 <p>Esse endpoint nos permite alterar um ou vários atributos do objeto Item</p>
-<p><strong>cURL:</strong> curl --location --request PATCH 'http://localhost:8080/api/itens/2' \
+
+````text
+cURL: curl --location --request PATCH 'http://localhost:8080/api/itens/2' \
 --header 'Content-Type: application/json' \
 --data-raw '
 {
     "creation": "26-02-2002"
-}'</p>
+}'
+````
 
 ![](./docs/patch-response.png)
 
 <h3>Atualizar</h3>
 <p>Caso algum campo for violado, retornará uma mensagem de erro, informando o campo que está inválido e se o ID não existir retornará 404 com uma mensagem de erro</p>
 <p>Esse endpoint nos permite alterar apenas cpf, total e o objeto address</p>
-<p><strong>cURL:</strong> curl --location --request PUT 'http://localhost:8080/api/pedidos/2' \
+
+````text
+cURL: curl --location --request PUT 'http://localhost:8080/api/pedidos/2' \
 --header 'Content-Type: application/json' \
 --data-raw ' {
         "cpf": "095.917.815-55",
@@ -106,15 +120,18 @@ projetos foram:
             "state": "SE",
             "cep": "49042-480"
         }
-    }'</p>
+    }'
+````
 
 ![](./docs/atualizar-order.png)
 
 <h3>Criar</h3>
 <p>Caso algum campo for violado, retornará uma mensagem de erro, informando o campo que está inválido</p>
 <p>Para esse endpoint é preciso está com o Kafka rodando no docker e subir também o ms-history</p>
-<p>A data estará como null porque ela é preenchida quando é salva no mongdb</p>
-<p><strong>cURL:</strong> curl --location --request POST 'http://localhost:8080/api/pedidos/' \
+<p>A data estará como null porque ela é preenchida quando é salva no Mongdb</p>
+
+````text
+cURL: curl --location --request POST 'http://localhost:8080/api/pedidos/' \
 --header 'Content-Type: application/json' \
 --data-raw ' {
         "cpf": "095.917.815-55",
@@ -138,7 +155,8 @@ projetos foram:
             "cep": "40430-390",
             "number": "9A"
         }
-    }'</p>
+    }'
+````
 
 ![](./docs/docker-kafka.png)
 ![](./docs/create-order.png)
@@ -150,21 +168,26 @@ projetos foram:
 
 ![](./docs/topic-consumer-history.png)
 
-
 <h3>Postman</h3>
 
 <h3>Listar</h3>
 <p>Listagem ocorre na ordem cronológica inversa, ou seja, listará do mais recente até o mais antigo, também possui o filtro entre duas datas, trazendo apenas o history das datas entre elas</p>
-<p><strong>cURL:</strong> curl --location --request GET 'http://localhost:8085/api/history/'</p>
+
+````text
+cURL: curl --location --request GET 'http://localhost:8085/api/history/'
+````
 
 ![](./docs/listar-history.png)
 
 <p>Listando history com filtro de data inicio e fim</p>
-<p><strong>cURL:</strong> curl --location --request GET 'http://localhost:8085/api/history/?inicio=2022-12-13&fim=2023-01-24'</p>
+
+````text
+cURL: curl --location --request GET 'http://localhost:8085/api/history/?inicio=2022-12-13&fim=2023-01-24'
+````
 
 ![](./docs/ordem-history.png)
 
-<h4>Response</h4>
+<h4>Response:</h4>
 
 ````
 {
