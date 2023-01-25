@@ -3,18 +3,18 @@
 <h2> Informações</h2>
 Os microserviços <strong>Order</strong> e <strong>History</strong> podem ser rodados de maneira individual, porém para o endpoint <strong>CRIAR</strong> do <strong>Order</strong> às duas aplicações + o <strong>Kafka</strong> precisam estar "startados". 
 
-Projetos de microserviços Order e History, as tecnologias usadas nesses
+Projetos de microserviços <strong>Order</strong> e <strong>History</strong>, as tecnologias usadas nesses
 projetos foram:
 <ul>
-  <li>Spring Boot</li>
-  <li>Docker</li>
-  <li>Kafka</li>
-  <li>Model Mapper</li>
-  <li>Lombok</li>
-  <li>MongoDB</li>
-  <li>MYSQL</li>
-  <li>Flyway</li>
-  <li>Postman</li>
+  <li><strong>Spring Boot</strong></li>
+  <li><strong>Docker</strong></li>
+  <li><strong>Kafka</strong></li>
+  <li><strong>Model Mapper</strong></li>
+  <li><strong>Lombok</strong></li>
+  <li><strong>MongoDB</strong></li>
+  <li><strong>MYSQL</strong></li>
+  <li><strong>Flyway</strong></li>
+  <li><strong>Postman</strong></li>
 </ul>
 
 <h3> Temos na pasta docker o arquivo docker-compose.yaml para poder rodar o Kafka e fazer a comunicação entre os dois microserviços </h3>
@@ -34,7 +34,7 @@ projetos foram:
 <h3>Postman</h3>
 
 <h3>Listar</h3>
-<p>Podendo filtrar por cpf e por maior valor (atenção na pesquisa por cpf, ela precisa ser igual ao cadastrado)</p>
+<p>Podendo filtrar por cpf e por maior valor (atenção na pesquisa por <strong>cpf</strong>, ela precisa ser igual ao cadastrado)</p>
 
 ````text
 cURL: curl --location --request GET 'http://localhost:8080/api/pedidos/'
@@ -72,7 +72,7 @@ cURL: curl --location --request GET 'http://localhost:8080/api/pedidos/'
 ```
 
 <h3>Buscar</h3>
-<p>Caso o ID não exista, retornará <strong>404 not found</strong></p>
+<p>Caso o <strong>ID</strong> não exista, retornará <strong>404 not found</strong></p>
 
 ````text
 cURL: curl --location --request GET 'http://localhost:8080/api/pedidos/1'
@@ -81,7 +81,7 @@ cURL: curl --location --request GET 'http://localhost:8080/api/pedidos/1'
 ![](./docs/buscar-id.png)
 
 <h3>Deletar</h3>
-<p>Caso o ID não exista, retornará 404 not found como na imagem abaixo, se existir retornará <strong>204 no content</strong></p>
+<p>Caso o <strong>ID</strong> não exista, retornará <strong>404 not found</strong> como na imagem abaixo, se existir retornará <strong>204 no content</strong></p>
 
 ````text
 cURL: curl --location --request DELETE 'http://localhost:8080/api/pedidos/12'
@@ -92,7 +92,7 @@ cURL: curl --location --request DELETE 'http://localhost:8080/api/pedidos/12'
 <h3>Patch - items</h3>
 <p>Caso algum campo for violado, retornará uma mensagem de erro, informando o campo que está inválido e se o ID não existir retornará <strong>404 not
 found</strong> com uma mensagem de erro</p>
-<p>Esse endpoint nos permite alterar um ou vários atributos do objeto Item</p>
+<p>Esse endpoint nos permite alterar um ou vários atributos do objeto <strong>Item</strong></p>
 
 ````text
 cURL: curl --location --request PATCH 'http://localhost:8080/api/itens/2' \
