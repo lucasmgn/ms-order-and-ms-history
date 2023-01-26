@@ -28,7 +28,6 @@ class TopicProducerTest {
 
     @Test
     void sendMessage(){
-        producer = new TopicProducer(kafkaTemplate);
 
         OrderResponseDTO orderResponseDTO = new OrderResponseDTO();
         orderResponseDTO.setTotal(new BigDecimal("25"));
