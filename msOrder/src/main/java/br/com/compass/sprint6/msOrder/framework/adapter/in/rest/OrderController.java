@@ -52,9 +52,7 @@ public class OrderController {
     @PatchMapping("/api/itens/{id}")
     public ResponseEntity<ItemResumeResponseDTO> updateItens(@PathVariable("id") Long id, @RequestBody Map<String, Object> fields){
         log.info("Atualizando Itens...");
-        Item item = itemService.fetchOrFail(id);
-        itemService.merge(fields,item);
-        ItemResumeResponseDTO itemResponseDTO = itemService.updateItem(id);
+        ItemResumeResponseDTO itemResponseDTO = itemService.updateItem(fields,id);
         return ResponseEntity.status(HttpStatus.OK).body(itemResponseDTO);
     }
 

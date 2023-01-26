@@ -33,9 +33,10 @@ public class ItemService {
         return repository.findById(id).orElseThrow(ItemNotFoundException::new);
     }
 
-    public ItemResumeResponseDTO updateItem(Long id) {
+    public ItemResumeResponseDTO updateItem(Map<String, Object> fields, Long id) {
         log.info("Chamando método updateItem - Service Item");
         Item item = fetchOrFail(id);
+        merge(fields, item);
         item = create(item);
         return assembler.toResumeModel(item);
     }
