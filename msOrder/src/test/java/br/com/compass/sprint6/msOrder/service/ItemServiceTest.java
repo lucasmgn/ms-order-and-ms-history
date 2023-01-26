@@ -56,14 +56,15 @@ class ItemServiceTest {
         Item item = createObject.item();
         item.setId(ID);
         ItemResumeResponseDTO itemResumeResponseDTO = createObject.getItemResumeResponseDTO();
+        Map<String, Object> fields = new HashMap<>();
 
         Mockito.when(repository.findById(any())).thenReturn(Optional.of(item));
         Mockito.when(repository.save(any())).thenReturn(item);
         Mockito.when(assembler.toResumeModel(any())).thenReturn(itemResumeResponseDTO);
 
-//        ItemResumeResponseDTO responseDTO = service.updateItem(ID);
+        ItemResumeResponseDTO responseDTO = service.updateItem(fields, ID);
 
-//        assertEquals(itemResumeResponseDTO.getPrice(), responseDTO.getPrice());
+        assertEquals(itemResumeResponseDTO.getPrice(), responseDTO.getPrice());
         verify(repository).save(any());
     }
 
